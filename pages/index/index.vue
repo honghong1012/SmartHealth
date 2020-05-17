@@ -41,6 +41,7 @@
 		<button class="cu-btn bg-blue lg" @click="logout">退出登录</button>
 
 	</view>
+
 </template>
 
 <script>
@@ -73,10 +74,18 @@
 				uni.removeStorageSync("class_id")
 				uni.removeStorageSync("stu_num")
 				uni.removeStorageSync("stu_name")
-
+				
+				/*
 				uni.navigateTo({
 					url: '/pages/login/login'
 				});
+				*/
+				
+				uni.switchTab({
+					url: '/pages/login/login'
+				});
+				
+				
 			},
 			setUserText(userType) {
 				const userOptionDB = {

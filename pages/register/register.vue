@@ -42,7 +42,9 @@
 				<div class="buttonGroup">
 					<button type="primary" @click="signUp">注册</button>
 				</div>
-				<navigator url="/pages/login/login" class="linkBtn" >
+				
+				<navigator url="/pages/login/login" class="linkBtn">
+				<!--<navigator class="linkBtn" @click="returnLogin">-->
 					<text>已有账号？点击登录 </text>
 				</navigator>
 				<!-- #ifdef MP-WEIXIN -->
@@ -97,6 +99,20 @@
 			this.school = uni.getStorageSync('school')
 		},
 		methods: {
+			returnLogin() {
+				//返回前页
+				/*
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
+				*/
+				
+				uni.switchTab({
+					url: '/pages/login/login'
+				});
+				
+			},
+			
 			tabChange(index) {
 				this.userType = index;
 			},

@@ -59,12 +59,55 @@
 			"style": {
 				"navigationBarTitleText": "绑定学生信息"
 			}
-		}
-	],
+		},
+	    {
+            "path" : "pages/news/news",
+            "style" : {
+				"navigationBarTitleText": "动态",
+				"navigationBarBackgroundColor": "#eee"
+			}
+        }
+        ,
+		{
+            "path" : "pages/about/about",
+            "style" : {
+				"navigationBarTitleText": "关于",
+				"navigationBarBackgroundColor": "#eee"
+			}
+        }
+    ],
+	
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	
+	"tabBar": {
+	    "color": "#bfbfbf",
+	    "selectedColor": "#1296db",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [
+			{
+	            "pagePath": "pages/login/login",
+	            "iconPath": "static/login.png",
+	            "selectedIconPath": "static/logins.png",
+	            "text": "登记"
+	        },
+			{
+	            "pagePath": "pages/news/news",
+	            "iconPath": "static/news.png",
+	            "selectedIconPath": "static/newss.png",
+	            "text": "动态"
+	        },
+			{
+	            "pagePath": "pages/about/about",
+	            "iconPath": "static/about.png",
+	            "selectedIconPath": "static/abouts.png",
+	            "text": "关于"
+	        }
+	    ]
 	}
 }

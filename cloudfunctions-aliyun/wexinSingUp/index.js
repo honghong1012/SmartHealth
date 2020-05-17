@@ -7,7 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var crypto = _interopDefault(require('crypto'));
 
 const loginConfig = {
-	AppId: 'wxc6a6390e3dbe372f', //微信小程序AppId
+	AppId: 'wx5f945a6771d78463', //微信小程序AppId
 	AppSecret: '46ffc2c5373afa7113f7cdc5dfbb0416' //微信小程序AppSecret
 };
 
