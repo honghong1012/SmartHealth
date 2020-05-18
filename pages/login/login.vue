@@ -45,9 +45,12 @@
 					<button type="primary" @click="signIn">登录</button>
 				</div>
 				<view class="text-right">
-					<navigator url="/pages/register/register" class="linkBtn" open-type="redirect">
-						<text>没有账号？前往注册</text>
+					<navigator class="linkBtn" @click="toRegister">
+						<text>没有账号？前往注册 </text>
 					</navigator>
+					<!-- <router-link to="/pages/register/register">
+						<text>没有账号？前往注册</text>
+					</router-link> -->
 				</view>
 			</view>
 		</view>
@@ -91,6 +94,11 @@
 			this.school = uni.getStorageSync('school')
 		},
 		methods: {
+			toRegister() {
+				uni.redirectTo({
+					url: '/pages/register/register'
+				});
+			},
 			tabChange(index) {
 				this.userType = index;
 			},
@@ -103,6 +111,7 @@
 				uni.showLoading({
 					title: '登录中...'
 				})
+				// 调用云函数signin
 				uniCloud.callFunction({
 					name: 'signIn',
 					data: {
@@ -175,7 +184,6 @@
 				uni.showLoading({
 					title: '登录中...'
 				})
-
 				this.getCode().then((code) => {
 					console.log('code', code);
 					const {
@@ -249,7 +257,6 @@
 				})
 			},
 		},
-
 		onReady() {}
 	};
 </script>

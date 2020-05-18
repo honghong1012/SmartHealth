@@ -243,7 +243,7 @@ function userTypeConfig(userType) {
 	};
 	return userOptionDB[userType];
 }
-
+// 将密码加密保存
 function encryptPassword(password) {
 	const hmac = crypto.createHmac('sha1', passSecret.toString('ascii'));
 	hmac.update(password);
@@ -269,14 +269,18 @@ async function signUp(event) {
 	let tokenSecret = crypto.randomBytes(16).toString('hex'),
 		token = jwtSimple.encode(userInfo, tokenSecret);
 	let userUpdateResult;
+	// 如果输入的是新用户就注册
 	if (userInDB.data && userInDB.data.length === 0) {
+		// 往数据库添加记录
 		userUpdateResult = await db.collection(userDBkye).add({
 			...userInfo,
 			password: encryptPassword(password),
 			tokenSecret,
 			exp: Date.now() + tokenExp
 		});
-	} else {
+	} 
+	// 不是新用户输出已存在，status为-1
+	else {
 		return {
 			status: -1,
 			msg: '此用户名已存在'
@@ -290,7 +294,6 @@ async function signUp(event) {
 			msg: '注册成功'
 		}
 	}
-
 	return {
 		status: -1,
 		msg: '注册失败'

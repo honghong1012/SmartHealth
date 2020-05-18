@@ -279,7 +279,9 @@ async function signUp(event) {
 			status: -1,
 			msg: '用户名或密码不正确'
 		}
-	} else {
+	}
+	
+	else {
 		userUpdateResult = await db.collection(userDBkye).doc(userInDB.data[0]._id).update({
 			tokenSecret,
 			exp: Date.now() + tokenExp

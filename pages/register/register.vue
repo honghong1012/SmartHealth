@@ -43,10 +43,13 @@
 					<button type="primary" @click="signUp">注册</button>
 				</div>
 				
-				<navigator url="/pages/login/login" class="linkBtn">
-				<!--<navigator class="linkBtn" @click="returnLogin">-->
+				<!--<navigator url="/pages/login/login" class="linkBtn">-->
+				<navigator class="linkBtn" @click="returnLogin">
 					<text>已有账号？点击登录 </text>
 				</navigator>
+				<!-- <router-link to="/pages/login/login">
+					<text>已有账号？点击登录</text>
+				</router-link> -->
 				<!-- #ifdef MP-WEIXIN -->
 				<div class="weixinBtn">
 					<div>其他方式注册</div>
@@ -100,22 +103,15 @@
 		},
 		methods: {
 			returnLogin() {
-				//返回前页
-				/*
-				uni.navigateTo({
-					url: '/pages/login/login'
-				});
-				*/
-				
 				uni.switchTab({
 					url: '/pages/login/login'
 				});
-				
 			},
 			
 			tabChange(index) {
 				this.userType = index;
 			},
+			// 注册
 			signUp() {
 				const {
 					username,
@@ -130,13 +126,15 @@
 					})
 					return 
 				}
+				// 老师注册必有ls字段
 				if(username.indexOf('ls') && this.userType == 0){
 					uni.showModal({
 						content: '老师的注册方式请咨询管理员',
 						showCancel: false
 					})
-					return 
+					return
 				}
+				// 管理员注册必有admin字段
 				if(username.indexOf('admin')  && this.userType == 3){
 					uni.showModal({
 						content: '您不是管理，请离开',
@@ -162,18 +160,17 @@
 						return Promise.reject(new Error(res.result.msg))
 					}
 					uni.setStorageSync('token', res.result.token)
-                    
+                    // 显示消息提示框
                     uni.showToast({
                         icon:"none",
                         title:"注册成功，请重新登录",
                         success() {
-                            uni.redirectTo({
-                                url:"../login/login"
-                            })
+							// 解决不跳转的bug
+							uni.switchTab({
+								url: '/pages/login/login'
+							})
                         }
                     })
-                    
-                    
 				}).catch((err) => {
 					console.log(err);
 					uni.hideLoading()
