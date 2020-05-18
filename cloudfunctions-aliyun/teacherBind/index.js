@@ -18,12 +18,11 @@ exports.main = async (event, context) => {
 		}).get()
 		data = classData.data
 	} else {
-        
+		
         let teacherObj = await teachers.where({
 			tokenSecret: event.token
 		}).get()
-        
-        
+		
         let uid = event.uid
         if(uid){
             teachers.doc(uid).update({

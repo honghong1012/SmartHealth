@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "登录",
-  "usingComponents": {
-    "wuc-tab": "/components/wuc-tab/wuc-tab",
-    "uni-icons": "/components/uni-icons/uni-icons"
-  }
-}
