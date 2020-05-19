@@ -49,16 +49,22 @@
 			return {
 				username: '',
 				password: '',
-				tabList: [
-					/* 界面按钮 */
-					{
-						name: '学生',
-						icon: 'cuIcon-dianhua'
-					},
-					
-					{
-						name: '管理员',
-						icon: 'cuIcon-wifi'
+				tabList: [{
+				 								name: '老师',
+				 								icon: 'cuIcon-comment'
+				 							},
+				 	 						{
+				 	 							name: '学生',
+				 	 							icon: 'cuIcon-dianhua'
+				 	 						},
+				 							{
+				 								name: '家长',
+				 								icon: 'cuIcon-wifi'
+				 							},
+				 						
+				 	 						{
+				 	 							name: '管理员',
+				 	 							icon: 'cuIcon-wifi'
 					}
 				],
 				userType: 0,
