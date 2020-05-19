@@ -10,24 +10,12 @@
 			 select-class="text-blue" />
 			<swiper :current="userType" class="swiper" duration="300" :circular="true" indicator-color="rgba(255,255,255,0)"
 			 indicator-active-color="rgba(255,255,255,0)">
-				<!-- 老师 -->
-				<swiper-item key="teacher">
-					<view class="desc">
-						<view>老师登录，查看自己班级的学生健康数据统计</view>
-					</view>
-				</swiper-item>
-
+			 
+			    <!-- 滑动模块文字内容 -->
 				<!-- 学生 -->
 				<swiper-item key="students">
 					<view class="desc">
 						<view>学生登录，自助上报每日健康状况</view>
-					</view>
-				</swiper-item>
-
-				<!-- 家长 -->
-				<swiper-item key="parents">
-					<view class="desc">
-						<view>家长登录代替孩子填写每日健康状况</view>
 					</view>
 				</swiper-item>
 
@@ -48,9 +36,6 @@
 					<navigator class="linkBtn" @click="toRegister">
 						<text>没有账号？前往注册 </text>
 					</navigator>
-					<!-- <router-link to="/pages/register/register">
-						<text>没有账号？前往注册</text>
-					</router-link> -->
 				</view>
 			</view>
 		</view>
@@ -64,18 +49,13 @@
 			return {
 				username: '',
 				password: '',
-				tabList: [{
-						name: '老师',
-						icon: 'cuIcon-comment'
-					},
+				tabList: [
+					/* 界面按钮 */
 					{
 						name: '学生',
 						icon: 'cuIcon-dianhua'
 					},
-					{
-						name: '家长',
-						icon: 'cuIcon-wifi'
-					},
+					
 					{
 						name: '管理员',
 						icon: 'cuIcon-wifi'
@@ -136,6 +116,7 @@
 					if (!res.result.class_id) {
 						switch (this.userType){
 							case 0:
+							/* 按钮删除之后可以把url也删掉 */
 							uni.navigateTo({
 								url: '/pages/teacher_bind/teacher_bind'
 							});
@@ -169,7 +150,6 @@
 						});
 					}
 					
-
 
 				}).catch((err) => {
 					console.log(err);

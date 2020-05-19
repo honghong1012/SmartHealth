@@ -8,13 +8,7 @@
 			<wuc-tab textFlex :tab-list="tabList" :tabCur.sync="userType" tab-class="text-center text-black bg-white swiper-title" select-class="text-blue" />
 			<swiper :current="userType" class="swiper" duration="300" :circular="true" indicator-color="rgba(255,255,255,0)"
 			 indicator-active-color="rgba(255,255,255,0)">
-				<!-- 老师 -->
-				<swiper-item key="teacher">
-					<view class="desc">
-						<view>老师登录，查看自己班级的学生健康数据统计</view>
-					</view>
-				</swiper-item>
-				
+				<!-- 以下为滑动提示框中的文字内容 -->
 				<!-- 学生 -->
 				<swiper-item key="students">
 					<view class="desc ">
@@ -22,12 +16,7 @@
 					</view>
 				</swiper-item>
 		
-				<!-- 家长 -->
-				<swiper-item key="parents">
-					<view class="desc">
-						<view>家长注册可代替孩子进行健康状况上报</view>
-					</view>
-				</swiper-item>
+				
 				<!-- 管理员 -->
 				<swiper-item key="admin">
 					<view class="desc">
@@ -47,9 +36,7 @@
 				<navigator class="linkBtn" @click="returnLogin">
 					<text>已有账号？点击登录 </text>
 				</navigator>
-				<!-- <router-link to="/pages/login/login">
-					<text>已有账号？点击登录</text>
-				</router-link> -->
+
 				<!-- #ifdef MP-WEIXIN -->
 				<div class="weixinBtn">
 					<div>其他方式注册</div>
@@ -72,17 +59,11 @@
 				username: '',
 				password: '',
 				repeatPassword:'',
-				tabList: [{
-						name: '老师',
-						icon: 'cuIcon-comment'
-					},
+				tabList: [
+					
 					{
 						name: '学生',
 						icon: 'cuIcon-dianhua'
-					},
-					{
-						name: '家长',
-						icon: 'cuIcon-wifi'
 					},
 					{
 						name: '管理员',
@@ -126,14 +107,8 @@
 					})
 					return 
 				}
-				// 老师注册必有ls字段
-				if(username.indexOf('ls') && this.userType == 0){
-					uni.showModal({
-						content: '老师的注册方式请咨询管理员',
-						showCancel: false
-					})
-					return
-				}
+				
+				
 				// 管理员注册必有admin字段
 				if(username.indexOf('admin')  && this.userType == 3){
 					uni.showModal({
