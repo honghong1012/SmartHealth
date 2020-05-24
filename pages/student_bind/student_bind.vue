@@ -87,6 +87,7 @@
                 uni.hideLoading();
                 console.error(err);
             });
+			
 			//获取专业列表
 			uniCloud.callFunction({
 			    name: 'getMajorList',

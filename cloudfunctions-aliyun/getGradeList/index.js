@@ -12,8 +12,8 @@ exports.main = async (event, context) => {
   const res = await collection.orderBy("order","asc").get()
   console.log("res:",res)
   
-  
   let resData = {}
+  let grade = {}
   if(res.data.length>0){
 	  // 年级名单
       resData.academyList = res.data;
@@ -25,7 +25,8 @@ exports.main = async (event, context) => {
           
           console.log("grade_res",gradeRes)
 		  // grade键为学院id，值为该学院下的年级记录
-          resData[res.data[i]._id] = gradeRes.data
+		  resData[res.data[i]._id] = gradeRes.data
+    //       grade[res.data[i]._id] = gradeRes.data
 		  
 		  // let majorCol = db.collection("major_list")
 		  // for (var i = 0; i < gradeRes.data.length; i++) {
@@ -38,19 +39,6 @@ exports.main = async (event, context) => {
 		  //     major[gradeRes.data[i]._id] = majorRes.data
 		  // }
       }
-	  // 专业名单
-	  // resData.gradeList = grade;
-	  // resData.academyList = res.data;
-	  //       let classCol = db.collection("grade_list")
-	  //       for (var i = 0; i < res.data.length; i++) {
-	  //           let classRes = await classCol.where({
-	  //               academy_id:res.data[i]._id
-	  //           }).orderBy("order","asc").get()
-	            
-	  //           console.log("class_res",classRes)
-	            
-	  //           resData[res.data[i]._id] = classRes.data
-	  //       }
   }else{
       console.log("length is 0??")
   }

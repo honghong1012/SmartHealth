@@ -131,10 +131,10 @@
 		},
 		methods: {
 			formSubmit: function(e) {
-				//class_id需要动态读取
+				//major_id需要动态读取
 				var data = {
 					stu_id: this.student.stu_num,
-					class_id: uni.getStorageSync("class_id"),
+					major_id: uni.getStorageSync("major_id"),
 					create_time: Date.now()
 				}
 				var formData = e.detail.value,
