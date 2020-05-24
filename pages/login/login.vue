@@ -10,19 +10,17 @@
 			 select-class="text-blue" />
 			<swiper :current="userType" class="swiper" duration="300" :circular="true" indicator-color="rgba(255,255,255,0)"
 			 indicator-active-color="rgba(255,255,255,0)">
-			 
 			    <!-- 滑动模块文字内容 -->
+				<!-- 辅导员 -->
+				<swiper-item key="teacher">
+					<view class="desc">
+						<view>辅导员模式</view>
+					</view>
+				</swiper-item>
 				<!-- 学生 -->
 				<swiper-item key="students">
 					<view class="desc">
 						<view>学生登录，自助上报每日健康状况</view>
-					</view>
-				</swiper-item>
-
-				<!-- 管理员 -->
-				<swiper-item key="admin">
-					<view class="desc">
-						<view>管理员模式</view>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -49,23 +47,23 @@
 			return {
 				username: '',
 				password: '',
-				tabList: [{
-				 								name: '老师',
-				 								icon: 'cuIcon-comment'
-				 							},
-				 	 						{
-				 	 							name: '学生',
-				 	 							icon: 'cuIcon-dianhua'
-				 	 						},
-				 							{
-				 								name: '家长',
-				 								icon: 'cuIcon-wifi'
-				 							},
-				 						
-				 	 						{
-				 	 							name: '管理员',
-				 	 							icon: 'cuIcon-wifi'
-					}
+				tabList: [
+							{
+				 				name: '老师',
+				 				icon: 'cuIcon-comment'
+				 			},
+				 	 		{
+								name: '学生',
+				 	 			icon: 'cuIcon-dianhua'
+				 	 		},
+				 		// 	{
+				 		// 		name: '家长',
+				 		// 		icon: 'cuIcon-wifi'
+				 		// 	},
+				 	 // 		{
+				 	 // 			name: '管理员',
+				 	 // 			icon: 'cuIcon-wifi'
+							// }
 				],
 				userType: 0,
 				school:''
@@ -118,45 +116,46 @@
 						content: '登录成功',
 						showCancel: false
 					})
-
-					if (!res.result.class_id) {
+					// 返回值无专业id，则需要绑定（新注册用户）
+					if (!res.result.major_id) {
 						switch (this.userType){
 							case 0:
-							/* 按钮删除之后可以把url也删掉 */
+							// 老师则不需绑定，直接到主页面
 							uni.navigateTo({
-								url: '/pages/teacher_bind/teacher_bind'
+								// url: '/pages/teacher_bind/teacher_bind'
+								url: '/pages/index/index'
 							});
 								break;
 							case 1:
+							// 学生无专业id则跳转绑定
 							uni.navigateTo({
 								url: '/pages/student_bind/student_bind'
 							})
 								break;
-							case 2:
-							uni.navigateTo({
-								url: '/pages/student_bind/student_bind'
-							})
-								break;
-							case 3:
-							uni.navigateTo({
-								url: '/pages/administrator/admin_grade'
-							})
-								break;
+							// case 2:
+							// uni.navigateTo({
+							// 	url: '/pages/student_bind/student_bind'
+							// })
+							// 	break;
+							// case 3:
+							// uni.navigateTo({
+							// 	url: '/pages/administrator/admin_grade'
+							// })
+							// 	break;
 						}
-					} else {
-						uni.setStorageSync("class_id", res.result.class_id)
-
-						if (this.userType == 1 || this.userType == 2) {
+					} 
+					// 有专业id，则不需要绑定
+					else {
+						uni.setStorageSync("major_id", res.result.major_id)
+						if (this.userType == 1) {
 							uni.setStorageSync("stu_num", res.result.stu_num)
 							uni.setStorageSync("stu_name", res.result.stu_name)
 						}
-
+						// 跳回index页面
 						uni.navigateTo({
 							url: '/pages/index/index'
 						});
 					}
-					
-
 				}).catch((err) => {
 					console.log(err);
 					uni.hideLoading()

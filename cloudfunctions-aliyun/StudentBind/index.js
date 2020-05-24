@@ -9,7 +9,7 @@ function userTypeConfig(userType) {
 	const userOptionDB = {
 		0:'teachers',
 		1:'students',
-		2:'parents',
+		// 2:'parents',
 	};
 	return userOptionDB[userType];
 }
@@ -21,7 +21,7 @@ exports.main = async (event, context) => {
   console.log('event : ', event)
   
   let userType = event.userType
-  if(!(userType==1 || userType==2)){
+  if(!(userType==1)){
       return {
       	status: -1,
       	msg: '参数错误'
@@ -31,7 +31,7 @@ exports.main = async (event, context) => {
   const userDB = userTypeConfig(userType);
   
   await db.collection(userDB).doc(event.uid).update({
-      class_id:event.class_info,
+      major_id:event.major_id,
       stu_num:event.stu_num,
       stu_name:event.stu_name
   });

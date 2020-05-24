@@ -9,11 +9,11 @@
 			</div> -->
 
 		</view>
-		<!-- 学生家长 -->
-		<view class="buttonGroup" v-if="userType === 1 || userType === 2">
-			<!-- <navigator url="../student_bind/student_bind" class="linkBtn" >
+		<!-- 学生 -->
+		<view class="buttonGroup" v-if="userType === 1">
+			<navigator url="../student_bind/student_bind" class="linkBtn" >
 				绑定学生信息
-			</navigator> -->
+			</navigator>
 			<navigator url="../student/student_day" class="linkBtn">
 				今日健康报备
 			</navigator>
@@ -29,15 +29,14 @@
 			</navigator>
 		</view>
 		<!-- 管理员 -->
-		<view class="buttonGroup" v-if="userType === 3">
+		<!-- <view class="buttonGroup" v-if="userType === 3">
 			<navigator url="../administrator/admin_grade" class="linkBtn">
 				年级管理
 			</navigator>
 			<navigator url="../administrator/admin_class" class="linkBtn">
 				班级管理
 			</navigator>
-		</view>
-
+		</view> -->
 		<button class="cu-btn bg-blue lg" @click="logout">退出登录</button>
 
 	</view>
@@ -60,8 +59,8 @@
 			if (uni.getStorageSync('token')) {
 				this.getUserInfo()
 			} else {
-				uni.navigateTo({
-					url: '../login/login'
+				uni.switchTab({
+					url: '/pages/login/login'
 				})
 			}
 		},
@@ -71,7 +70,9 @@
 				uni.removeStorageSync('token')
 				uni.removeStorageSync("userType")
 				uni.removeStorageSync("uid")
-				uni.removeStorageSync("class_id")
+				uni.removeStorageSync("academy_id")
+				uni.removeStorageSync("major_id")
+				uni.removeStorageSync("grade_id")
 				uni.removeStorageSync("stu_num")
 				uni.removeStorageSync("stu_name")
 				
@@ -91,8 +92,8 @@
 				const userOptionDB = {
 					0: '老师',
 					1: '学生',
-					2: '家长',
-					3: '管理员',
+					// 2: '家长',
+					// 3: '管理员',
 				}
 				return userOptionDB[userType];
 			},

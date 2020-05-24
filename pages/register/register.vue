@@ -9,18 +9,16 @@
 			<swiper :current="userType" class="swiper" duration="300" :circular="true" indicator-color="rgba(255,255,255,0)"
 			 indicator-active-color="rgba(255,255,255,0)">
 				<!-- 以下为滑动提示框中的文字内容 -->
+				<!-- 辅导员 -->
+				<swiper-item key="teacher">
+					<view class="desc">
+						<view>辅导员模式,管理班级等信息</view>
+					</view>
+				</swiper-item>
 				<!-- 学生 -->
 				<swiper-item key="students">
 					<view class="desc ">
 						<view>学生注册后可关联自己的班级上报健康状况</view>
-					</view>
-				</swiper-item>
-		
-				
-				<!-- 管理员 -->
-				<swiper-item key="admin">
-					<view class="desc">
-						<view>管理员模式,管理班级等信息</view>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -59,23 +57,23 @@
 				username: '',
 				password: '',
 				repeatPassword:'',
-				tabList: [{
-				 								name: '老师',
-				 								icon: 'cuIcon-comment'
-				 							},
-				 	 						{
-				 	 							name: '学生',
-				 	 							icon: 'cuIcon-dianhua'
-				 	 						},
-				 							{
-				 								name: '家长',
-				 								icon: 'cuIcon-wifi'
-				 							},
-				 						
-				 	 						{
-				 	 							name: '管理员',
-				 	 							icon: 'cuIcon-wifi'
-					}
+				tabList: [
+							{
+				 				name: '老师',
+				 				icon: 'cuIcon-comment'
+				 			},
+				 	 		{
+				 	 			name: '学生',
+				 	 			icon: 'cuIcon-dianhua'
+				 	 		},
+				 		// 	{
+				 		// 		name: '家长',
+				 		// 		icon: 'cuIcon-wifi'
+				 		// 	},
+				 	 // 		{
+				 	 // 			name: '管理员',
+				 	 // 			icon: 'cuIcon-wifi'
+							// }
 				],
 				userType: 0,
 				school:''
@@ -114,16 +112,13 @@
 					})
 					return 
 				}
-				
-				
-				// 管理员注册必有admin字段
-				if(username.indexOf('admin')  && this.userType == 3){
-					uni.showModal({
-						content: '您不是管理，请离开',
-						showCancel: false
-					})
-					return 
-				}
+				// if(username.indexOf('admin')  && this.userType == 3){
+				// 	uni.showModal({
+				// 		content: '您不是管理，请离开',
+				// 		showCancel: false
+				// 	})
+				// 	return 
+				// }
 				console.log(userType);
 				uni.showLoading({
 					title: '注册中...'

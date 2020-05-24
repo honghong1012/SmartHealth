@@ -238,8 +238,8 @@ function userTypeConfig(userType) {
 	const userOptionDB = {
 		0:'teachers',
 		1:'students',
-		2:'parents',
-		3:'admin_users',
+		// 2:'parents',
+		// 3:'admin_users',
 	};
 	return userOptionDB[userType];
 }
@@ -271,7 +271,14 @@ async function signUp(event) {
 	let userUpdateResult;
 	// 如果输入的是新用户就注册
 	if (userInDB.data && userInDB.data.length === 0) {
-		// 往数据库添加记录
+		// 老师不能注册
+		if (userType == 0){
+			return {
+				status: -1,
+				msg: '老师不能注册！'
+			}
+		}
+		// 若不是老师，往数据库添加记录
 		userUpdateResult = await db.collection(userDBkye).add({
 			...userInfo,
 			password: encryptPassword(password),
