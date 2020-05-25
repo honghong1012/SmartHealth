@@ -6,7 +6,7 @@ const dbCmd = db.command
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ' + event)
-	const collection = db.collection('class_list')
+	const collection = db.collection('major_list')
 	const res = await collection.orderBy("order", "asc").where({
 		grade_id: dbCmd.eq(event.grade_id)
 	}).get()

@@ -104,6 +104,15 @@
 						userType,
 					},
 				}).then((res) => {
+					// uni.showModal({
+					// 	content: '登录成功',
+					// 	showCancel: false
+					// })
+					// showModel无法同步输出
+					uni.showToast({
+					    icon:"none",
+					    title:"登录成功",
+					})
 					console.log('返回的', res);
 					uni.hideLoading()
 					if (res.result.status !== 0) {
@@ -112,10 +121,8 @@
 					uni.setStorageSync('token', res.result.token)
 					uni.setStorageSync('uid', res.result.uid)
 					uni.setStorageSync("userType", this.userType)
-					uni.showModal({
-						content: '登录成功',
-						showCancel: false
-					})
+					uni.setStorageSync("username",this.username)
+					uni.setStorageSync("academy_id",res.result.academy_id)
 					// 返回值无专业id，则需要绑定（新注册用户）
 					if (!res.result.major_id) {
 						switch (this.userType){

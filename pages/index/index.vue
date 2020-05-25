@@ -11,22 +11,31 @@
 		</view>
 		<!-- 学生 -->
 		<view class="buttonGroup" v-if="userType === 1">
+			<view class="welcome">{{username}}，您好</view>
 			<navigator url="../student_bind/student_bind" class="linkBtn" >
 				绑定学生信息
 			</navigator>
 			<navigator url="../student/student_day" class="linkBtn">
 				今日健康报备
 			</navigator>
+			<!-- <button class="cu-btn bg-blue lg" @click="logout">退出登录</button> -->
 		</view>
 		<!-- 老师 -->
 		<view class="buttonGroup" v-if="userType === 0">
-			<view class="welcome">老师，您好</view>
-			<navigator url="../teacher_bind/teacher_bind" class="linkBtn">
+			<view class="welcome">{{username}}老师，您好</view>
+			<!-- <navigator url="../teacher_bind/teacher_bind" class="linkBtn">
 				绑定管理班级
+			</navigator> -->
+			<navigator url="../administrator/admin_grade" class="linkBtn">
+				年级管理
+			</navigator>
+			<navigator url="../administrator/admin_class" class="linkBtn">
+				班级管理
 			</navigator>
 			<navigator url="/pages/list/list" class="linkBtn">
 				查看报备数据
 			</navigator>
+			<!-- <button class="cu-btn bg-blue lg" @click="logout">退出登录</button> -->
 		</view>
 		<!-- 管理员 -->
 		<!-- <view class="buttonGroup" v-if="userType === 3">
@@ -38,7 +47,10 @@
 			</navigator>
 		</view> -->
 		<button class="cu-btn bg-blue lg" @click="logout">退出登录</button>
-
+		<!-- <view class="buttonGroup" v-if="userType === 4">
+			<view class="welcome">欢迎进入健康报备系统！</view>
+			<button class="cu-btn bg-blue lg" @click="logout">进入</button>
+		</view> -->
 	</view>
 
 </template>
@@ -50,10 +62,12 @@
 				school: '',
 				userType: 4,
 				userText: '',
+				username:'',
 			}
 		},
 		onLoad:function(){
 			this.school = uni.getStorageSync('school')
+			this.username = uni.getStorageSync('username')
 		},
 		onShow() {
 			if (uni.getStorageSync('token')) {
@@ -75,13 +89,13 @@
 				uni.removeStorageSync("grade_id")
 				uni.removeStorageSync("stu_num")
 				uni.removeStorageSync("stu_name")
-				
+				uni.removeStorageSync("username")
 				/*
 				uni.navigateTo({
 					url: '/pages/login/login'
 				});
 				*/
-				
+				// 切换到登录页面
 				uni.switchTab({
 					url: '/pages/login/login'
 				});

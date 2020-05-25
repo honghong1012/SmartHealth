@@ -18,7 +18,7 @@
 					<t-th align="left">操作</t-th>
 				</t-tr>
 				<t-tr font-size="14" color="#494743" align="right" v-for="(item,index) of tableList" :key="item.id">
-					<t-td align="left">{{item.order }}</t-td>
+					<t-td align="left">{{ item.order }}</t-td>
 					<t-td align="left">{{ item.name }}</t-td>
 					<t-td align="left">
 						<button size="mini" style="padding: 10rpx;" @click="navTo('/pages/administrator/admin_class?grade_id='+ item._id)"
@@ -48,24 +48,25 @@
 		},
 		data() {
 			return {
-				tableList: [{
-						_id: "", // string，自生成--未处理
-						name: '一年级', //一年级、二年级等
-						order: 0, //年级排序
-					},
-					{
-						_id: "", // string，自生成--未处理
-						name: '二年级',
-						order: 1, //年级排序
-					},
-					{
-						_id: "", // string，自生成--未处理
-						name: '三年级', //一年级、二年级等
-						order: 2, //年级排序
-					}
+				tableList: [
+					// {
+					// 	_id: "", // string，自生成--未处理
+					// 	name: '一年级', //一年级、二年级等
+					// 	order: 0, //年级排序
+					// },
+					// {
+					// 	_id: "", // string，自生成--未处理
+					// 	name: '二年级',
+					// 	order: 1, //年级排序
+					// },
+					// {
+					// 	_id: "", // string，自生成--未处理
+					// 	name: '三年级', //一年级、二年级等
+					// 	order: 2, //年级排序
+					// }
 				],
-				//_id: '', // string，自生成--未处理
-				name: '', //一年级、二年级等
+				academy_id:'',
+				name: '', //2019级，2018级等
 				order: '', //年级排序
 				isedit: false,
 				list_item: {} //待修改项
@@ -79,14 +80,19 @@
 				uni.showLoading({
 					title: '查询中，请稍等！'
 				})
-				this.tableList = []
+				// this.tableList = []
+				this.academy_id = uni.getStorageSync('academy_id')
 				//获取年级列表
 				uniCloud.callFunction({
-						name: 'getGradeList',
+						name: 'getGrade',
+						data:{
+							academy_id:this.academy_id,
+						},
 					})
 					.then(res => {
 						uni.hideLoading()
 						console.log(res);
+						// 获取指定学院的年级列表
 						this.tableList = res.result
 					})
 					.catch(err => {
@@ -128,7 +134,6 @@
 										uni.hideLoading();
 										// 重新获得列表
 										this.init()
-
 									})
 									.catch(err => {
 										uni.hideLoading();
@@ -138,7 +143,8 @@
 						}
 					})
 
-				} else {
+				} 
+				else {
 					// 添加
 					var info = {
 						name: this.name,
