@@ -33,7 +33,7 @@
   line-height: 80rpx;
 }
 .collect ._span {
-  color: #f00;
+    color: #f00;
 }
 .select {
   display: inline-block;
@@ -51,23 +51,21 @@
   background-color: #f5f5f4;
 }
 .listOne {
-  -webkit-border-radius: 20rpx 20rpx 0 0;
-          border-radius: 20rpx 20rpx 0 0;
+  border-radius: 20rpx 20rpx 0 0;
 }
 .listFinally {
-  -webkit-border-radius: 0 0 20rpx 20rpx;
-          border-radius: 0 0 20rpx 20rpx;
+  border-radius: 0 0 20rpx 20rpx;
 }
 .top {
   padding-left: 12rpx;
   font-size: 26rpx;
 }
 .top view {
-  display: inline-block;
-  line-height: 80rpx;
+    display: inline-block;
+    line-height: 80rpx;
 }
 .top .name {
-  margin-left: 20rpx;
+    margin-left: 20rpx;
 }
 .time {
   position: fixed;

@@ -145,9 +145,11 @@
 				} 
 				else {
 					// 添加
+					this.academy_id = uni.getStorageSync('academy_id')
 					var info = {
 						name: this.name,
-						order: this.tableList.length + 1
+						order: this.tableList.length + 1,
+						academy_id: this.academy_id,
 					}
 					uni.showModal({
 						title: '提示',

@@ -48,10 +48,8 @@
 	width: 90%;
 	text-align: center;
 	margin-bottom: 20rpx;
-	-webkit-border-radius: 40rpx;
-	        border-radius: 40rpx;
-	-webkit-box-shadow: 0 3px 5px rgba(5, 26, 180, 0.35);
-	        box-shadow: 0 3px 5px rgba(5, 26, 180, 0.35);
+	border-radius: 40rpx;
+	box-shadow: 0 3px 5px rgba(5, 26, 180, 0.35);
 	font-weight: bold;
 	background: -webkit-linear-gradient(315deg, #576FEC 0%, #576FEC 76%, #536DEC 76%);
 	background: linear-gradient(135deg, #576FEC 0%, #576FEC 76%, #536DEC 76%);

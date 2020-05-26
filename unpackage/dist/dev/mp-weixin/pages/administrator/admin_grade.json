@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "年级管理",
+  "navigationBarTitleText": "学生年级管理",
   "usingComponents": {
     "t-table": "/components/t-table/t-table",
     "t-th": "/components/t-table/t-th",
