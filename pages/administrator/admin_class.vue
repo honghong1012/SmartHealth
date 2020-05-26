@@ -1,7 +1,7 @@
 <!-- 管理员管理班级信息 江西-前端-Ran -->
 <template>
 	<view class="warp" style="margin-top:50rpx ;">
-		<view align="center">管理班级信息</view>
+		<view align="center">管理专业信息</view>
 		<form action="">
 			<view class="uni-title  uni-common-pl">班级</view>
 			<view class="uni-form-item dashed-bottom">
@@ -18,7 +18,7 @@
 			<t-table border="3" border-color="#e6e5e5">
 				<t-tr font-size="16" color="#101411" align="center">
 					<t-th align="left">序号</t-th>
-					<t-th align="left">班级</t-th>
+					<t-th align="left">专业</t-th>
 					<t-th align="left">总人数</t-th>
 					<t-th align="left">操作</t-th>
 				</t-tr>

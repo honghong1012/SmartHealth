@@ -21,7 +21,7 @@
 					<t-td align="left">{{ item.order }}</t-td>
 					<t-td align="left">{{ item.name }}</t-td>
 					<t-td align="left">
-						<button size="mini" style="padding: 10rpx;" @click="navTo('/pages/administrator/admin_class?grade_id='+ item._id)"
+						<button size="mini" style="padding: 10rpx;" @click="navTo('/pages/administrator/admin_class?grade_id='+ item._id+'&grade_name='+item.name)"
 						 type="primary">查看</button>
 						<button size="mini" style="padding: 10rpx;" type="primary" @click="edit(item)">修改</button>
 						<button size="mini" style="padding: 10rpx;" type="warn" @click="del(item)">删除</button>

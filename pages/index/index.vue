@@ -26,13 +26,21 @@
 			<!-- <navigator url="../teacher_bind/teacher_bind" class="linkBtn">
 				绑定管理班级
 			</navigator> -->
-			<navigator url="../administrator/admin_grade" class="linkBtn" style="width: 300px; ">
-				年级管理
+			<view class="navigator-area">
+				<view style="margin-top: 100upx;">
+				</view>
+			</view>
+			<navigator url="../administrator/admin_grade" class="linkBtn" style="width: 300px; font-size:20px; height: 45px; ">
+				学生管理
 			</navigator>
+			<view class="navigator-area">
+				<view style="margin-top: 50upx;margin-bottom: 50upx;">
+				</view>
+			</view>
 			<!--<navigator url="../administrator/admin_class" class="linkBtn">
 				班级管理
 			</navigator>-->
-			<navigator url="/pages/list/list" class="linkBtn" style="width: 300px;">
+			<navigator url="/pages/list/list" class="linkBtn" style="width: 300px; font-size:20px; height: 45px;">
 				查看报备数据
 			</navigator>
 			<!-- <button class="cu-btn bg-blue lg" @click="logout">退出登录</button> -->

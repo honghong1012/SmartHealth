@@ -4,14 +4,18 @@
 const db = uniCloud.database()
 const dbCmd = db.command
 exports.main = async (event, context) => {
+	
+	
 	//event为客户端上传的参数
 	console.log('event : ' + event)
-	const collection = db.collection('major_list')
-	const res = await collection.orderBy("order", "asc").where({
+	let major_col = db.collection('major_list')
+	let res = await major_col.where({
 		grade_id: dbCmd.eq(event.grade_id)
-	}).get()
-	console.log("res:", res)
+	}).orderBy("order", "asc").get()
+	
+	console.log("res", res)
+	// 返回指定了年级id后的专业列表
 	let resData = res.data
 	//返回数据给客户端
 	return resData
-};
+};//
