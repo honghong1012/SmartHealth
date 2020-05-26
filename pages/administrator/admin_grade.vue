@@ -17,13 +17,12 @@
 					<t-th align="left">年级</t-th>
 					<t-th align="left">操作</t-th>
 				</t-tr>
-				<t-tr font-size="14" color="#494743" align="right" v-for="(item,index) of tableList" :key="item.id">
+				<t-tr font-size="14" color="#494743" align="right" v-for="(item,index) of tableList" :key="item._id">
 					<t-td align="left">{{ item.order }}</t-td>
 					<t-td align="left">{{ item.name }}</t-td>
 					<t-td align="left">
 						<button size="mini" style="padding: 10rpx;" @click="navTo('/pages/administrator/admin_class?grade_id='+ item._id)"
-						 type="primary">查看
-						</button>
+						 type="primary">查看</button>
 						<button size="mini" style="padding: 10rpx;" type="primary" @click="edit(item)">修改</button>
 						<button size="mini" style="padding: 10rpx;" type="warn" @click="del(item)">删除</button>
 					</t-td>

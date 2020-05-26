@@ -25,8 +25,8 @@
 				</swiper-item>
 			</swiper>
 			<view class="login-form">
-				<input type="text" value="" placeholder="请输入用户名" v-model="username" />
-				<input type="text" value="" placeholder="请输入密码" password="true" v-model="password" />
+				<input type="text" value="" placeholder="请输入用户名" v-model="username"  style="border-radius:4px;border:1px solid #DBDBDB;" />
+				<input type="text" value="" placeholder="请输入密码" password="true" v-model="password" style="border-radius:4px;border:1px solid #DBDBDB;" />
 				<div class="buttonGroup">
 					<button type="primary" @click="signIn">登录</button>
 				</div>

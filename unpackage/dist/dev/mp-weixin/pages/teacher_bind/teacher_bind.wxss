@@ -41,7 +41,8 @@
   top: 65%;
   left: 0;
   right: 0;
-  border-radius: 40rpx 40rpx 0 0;
+  -webkit-border-radius: 40rpx 40rpx 0 0;
+          border-radius: 40rpx 40rpx 0 0;
   text-align: center;
   border-top: 1px solid #000;
   padding-top: 20rpx;
@@ -64,7 +65,8 @@
   width: 200rpx;
   height: 80rpx;
   line-height: 80rpx;
-  border-radius: 50rpx;
+  -webkit-border-radius: 50rpx;
+          border-radius: 50rpx;
   color: #fff;
   text-align: center;
   background-color: #1aac19;

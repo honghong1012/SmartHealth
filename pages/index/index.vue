@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<view class="text-area">
-			<view style="margin-top: 150upx;margin-bottom: 100upx;">
-				<text class="title">{{school}}学生健康报备系统</text>
+			<view style="margin-top: 100upx;margin-bottom: 100upx;">
+				<text class="title" style ="font-size: 30px;">{{school}}学生健康报备系统</text>
 			</view>
 			<!-- <div class="tipText">
 				<text>{{userText}}您好</text>
@@ -26,13 +26,13 @@
 			<!-- <navigator url="../teacher_bind/teacher_bind" class="linkBtn">
 				绑定管理班级
 			</navigator> -->
-			<navigator url="../administrator/admin_grade" class="linkBtn">
+			<navigator url="../administrator/admin_grade" class="linkBtn" style="width: 300px; ">
 				年级管理
 			</navigator>
-			<navigator url="../administrator/admin_class" class="linkBtn">
+			<!--<navigator url="../administrator/admin_class" class="linkBtn">
 				班级管理
-			</navigator>
-			<navigator url="/pages/list/list" class="linkBtn">
+			</navigator>-->
+			<navigator url="/pages/list/list" class="linkBtn" style="width: 300px;">
 				查看报备数据
 			</navigator>
 			<!-- <button class="cu-btn bg-blue lg" @click="logout">退出登录</button> -->
@@ -45,8 +45,8 @@
 			<navigator url="../administrator/admin_class" class="linkBtn">
 				班级管理
 			</navigator>
-		</view> -->
-		<button class="cu-btn bg-blue lg" @click="logout">退出登录</button>
+		</view> -->	
+		<button class="cu-btn bg-blue lg" style="position:absolute; bottom:100px;" @click="logout">退出登录 </button>
 		<!-- <view class="buttonGroup" v-if="userType === 4">
 			<view class="welcome">欢迎进入健康报备系统！</view>
 			<button class="cu-btn bg-blue lg" @click="logout">进入</button>
