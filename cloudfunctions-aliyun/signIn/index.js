@@ -249,7 +249,7 @@ function userTypeConfig(userType) {
 }
 
 const db = uniCloud.database();
-
+const dbCmd = db.command
 async function signUp(event) {
 	const {
 		username,
@@ -285,7 +285,27 @@ async function signUp(event) {
 			exp: Date.now() + tokenExp
 		});
 	}
-
+	
+	var gradeid = ''
+	var academyid = ''
+	const majorList = db.collection('major_list') //  获取专业表
+	const gradeList = db.collection('grade_list') //  获取年级表
+	const academyList = db.collection('academy_list') //  获取专业表
+	// 学生
+	if(userType==1){
+		let majorres = await majorList.where({
+			// 专业名
+			_id:userInDB.data[0].major_id
+		}).get()
+		gradeid = majorres.data[0].grade_id
+		let graderes = await gradeList.where({
+			// 获取专业表的总数
+			_id:gradeid
+		}).get()
+		academyid = graderes.data[0].academy_id
+	}
+	
+	
 	if (userUpdateResult.id || userUpdateResult.affectedDocs === 1) {
 		return {
 			status: 0,
@@ -293,8 +313,9 @@ async function signUp(event) {
 			msg: '登录成功',
             uid:userInDB.data[0]._id,
 			// 若为老师则返回academy_info
-            academy_id:userType==0?userInDB.data[0].academy_info:'',
+            academy_id:userType==0?userInDB.data[0].academy_info:academyid,
 			major_id:userType==1?userInDB.data[0].major_id:'',
+			grade_id:userType==1?gradeid:'',
             stu_num:(userType==1)?userInDB.data[0].stu_num:'',
             stu_name:(userType==1)?userInDB.data[0].stu_name:''
 		}

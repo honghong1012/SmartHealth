@@ -189,35 +189,87 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var myDate = new Date();
 var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate.getDate() + 1);var _default =
 {
   data: function data() {
     return {
-      class_id: "", //  班级标志
+      academy_id: "", //  班级标志
       num: -1,
       time: '', //  当前选择的时间
       selectTime: false, //  选择时间弹框
       stat: 0, //  已统计人数
       lack: 0, //  缺少
-      arr: [] //  学生的日健康统计数组
+      arr: [], //  学生的日健康统计数组
+      gradeList: [], // 该学院下的年级列表
+      majorList: [], // 该年级下的专业列表
+      gradeArr: [], // 特定学院下的年级
+      gradeIndex: "", // 年级索引
+      gradeName: '',
+      selected_grade_id: '' // 下拉框选择的年级id
     };
   },
   components: {
     uniCalendar: uniCalendar },
 
-  onLoad: function onLoad(data) {
+  onLoad: function onLoad(data) {var _this = this;
     if (uni.getStorageSync('token')) {
-      this.class_id = uni.getStorageSync("class_id");
+      this.academy_id = uni.getStorageSync('academy_id');
       this.time = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + myDate.getDate();
-      this.http();
+      // this.http();
     } else {
       uni.navigateTo({
         url: '../login/login' });
 
     }
+    //获取该学院下的年级
+    uniCloud.callFunction({
+      name: 'getGradeList' }).
+
+    then(function (res) {
+      console.log(res);
+      _this.gradeList = res.result;
+    }).
+    catch(function (err) {
+      uni.hideLoading();
+      console.error(err);
+    });
+    //获取专业列表
+    uniCloud.callFunction({
+      name: 'getMajorList' }).
+
+    then(function (res) {
+      console.log(res);
+      _this.majorList = res.result;
+    }).
+    catch(function (err) {
+      uni.hideLoading();
+      console.error(err);
+    });
   },
   methods: {
+    selectgradeChange: function selectgradeChange(e) {
+      console.log(e.target.value);
+      this.gradeIndex = e.target.value;
+      this.gradeArr = this.gradeList[this.academy_id];
+      this.gradeName = this.gradeArr[this.gradeIndex].name;
+      this.selected_grade_id = this.gradeArr[this.gradeIndex]._id;
+    },
     change: function change(e) {
       console.log(e);
       time2 = e.year + '/' + e.month + '/' + (e.date + 1);
@@ -228,7 +280,7 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
       }
       this.selectTime = false;
     },
-    http: function http() {var _this = this;
+    confirm: function confirm() {var _this2 = this;
       uni.showLoading({
         title: '处理中...' });
 
@@ -237,7 +289,7 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
       uniCloud.callFunction({
         name: 'query_reports',
         data: {
-          class_id: uni.getStorageSync("class_id"),
+          grade_id: this.selected_grade_id,
           time: start,
           time2: start2 } }).
 
@@ -245,10 +297,10 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
       then(function (res) {
         uni.hideLoading();
         console.log(res);
-        _this.stat = res.result.arr.length;
-        _this.arr = res.result.arr;
+        _this2.stat = res.result.arr.length;
+        _this2.arr = res.result.arr;
         if (res.result.student_sum != '未获取到该班级信息') {
-          _this.lack = res.result.student_sum - _this.stat;
+          _this2.lack = res.result.student_sum - _this2.stat;
         } else {
           uni.showToast({
             title: res.result.student_sum,
@@ -265,7 +317,7 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
             return 0;
           };
         };
-        _this.arr.sort(objectArraySort('stu_num'));
+        _this2.arr.sort(objectArraySort('stu_num'));
       }).
       catch(function (err) {
         uni.hideLoading();

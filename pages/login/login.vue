@@ -122,14 +122,13 @@
 					uni.setStorageSync('uid', res.result.uid)
 					uni.setStorageSync("userType", this.userType)
 					uni.setStorageSync("username",this.username)
-					uni.setStorageSync("academy_id",res.result.academy_id)
 					// 返回值无专业id，则需要绑定（新注册用户）
 					if (!res.result.major_id) {
 						switch (this.userType){
 							case 0:
 							// 老师则不需绑定，直接到主页面
+							uni.setStorageSync("academy_id",res.result.academy_id)
 							uni.navigateTo({
-								// url: '/pages/teacher_bind/teacher_bind'
 								url: '/pages/index/index'
 							});
 								break;
@@ -154,6 +153,8 @@
 					// 有专业id，则不需要绑定
 					else {
 						uni.setStorageSync("major_id", res.result.major_id)
+						uni.setStorageSync("grade_id", res.result.grade_id)
+						uni.setStorageSync("academy_id",res.result.academy_id)
 						if (this.userType == 1) {
 							uni.setStorageSync("stu_num", res.result.stu_num)
 							uni.setStorageSync("stu_name", res.result.stu_name)

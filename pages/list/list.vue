@@ -1,6 +1,21 @@
 <!-- 每日健康统计汇总 深圳-前端-张昊 -->
 <template>
 	<view class="body">
+		<view class="uni-list" style="margin-top: 30px;">
+		    <view class="uni-list-cell">
+		        <view class="uni-list-cell-left">
+		            选择年级
+		        </view>
+		        <view class="uni-list-cell-db">
+		            <picker @change="selectgradeChange" :value="gradeIndex" :range="gradeArr" range-key="name">
+		                <view class="uni-input">{{gradeName}}</view>
+		            </picker>
+		        </view>
+				<view class="buttonGroup">
+				    <button type="primary" @click="confirm">确定</button>
+				</view>
+		    </view>
+		</view>
 		<view class="collect">
 			已统计
 			<span>{{ stat }}</span>
@@ -47,13 +62,19 @@ let time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
 export default {
 	data() {
 		return {
-			class_id: "", //  班级标志
+			academy_id: "", //  班级标志
 			num: -1,
 			time: '', //  当前选择的时间
 			selectTime: false, //  选择时间弹框
 			stat: 0, //  已统计人数
 			lack: 0, //  缺少
-			arr: [] //  学生的日健康统计数组
+			arr: [] ,//  学生的日健康统计数组
+			gradeList: [], // 该学院下的年级列表
+			majorList: [], // 该年级下的专业列表
+			gradeArr: [], // 特定学院下的年级
+			gradeIndex: "", // 年级索引
+			gradeName:'',
+			selected_grade_id:'', // 下拉框选择的年级id
 		};
 	},
 	components: {
@@ -61,16 +82,47 @@ export default {
 	},
 	onLoad(data) {
 		if (uni.getStorageSync('token')) {
-			this.class_id = uni.getStorageSync("class_id")
+			this.academy_id = uni.getStorageSync('academy_id')
 			this.time = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + myDate.getDate();
-			this.http();
+			// this.http();
 		}else{
 			uni.navigateTo({
 				url:'../login/login'
 			})
 		}
+		//获取该学院下的年级
+		uniCloud.callFunction({
+		    name: 'getGradeList',
+		})
+		.then(res => {
+		    console.log(res);
+			this.gradeList = res.result
+		})
+		.catch(err => {
+		    uni.hideLoading();
+		    console.error(err);
+		});
+		//获取专业列表
+		uniCloud.callFunction({
+		    name: 'getMajorList',
+		})
+		.then(res => {
+		    console.log(res);
+			this.majorList = res.result
+		})
+		.catch(err => {
+		    uni.hideLoading();
+		    console.error(err);
+		});
 	},
 	methods: {
+		selectgradeChange: function(e) {
+		    console.log(e.target.value)
+		    this.gradeIndex = e.target.value
+			this.gradeArr = this.gradeList[this.academy_id]
+		    this.gradeName = this.gradeArr[this.gradeIndex].name
+			this.selected_grade_id = this.gradeArr[this.gradeIndex]._id
+		},
 		change(e) {
 			console.log(e);
 			time2 = e.year + '/' + e.month + '/' + (e.date + 1);
@@ -81,7 +133,7 @@ export default {
 			}
 			this.selectTime = false;
 		},
-		http() {
+		confirm: function() {
 			uni.showLoading({
 				title: '处理中...'
 			});
@@ -90,7 +142,7 @@ export default {
 			uniCloud.callFunction({
 					name: 'query_reports',
 					data: {
-						class_id: uni.getStorageSync("class_id"),
+						grade_id: this.selected_grade_id,
 						time: start,
 						time2: start2
 					}

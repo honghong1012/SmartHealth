@@ -3,13 +3,13 @@
 	<view class="warp" style="margin-top:50rpx ;">
 		<view align="center">管理专业信息</view>
 		<form action="">
-			<view class="uni-title  uni-common-pl">班级</view>
+			<view class="uni-title  uni-common-pl">专业</view>
 			<view class="uni-form-item dashed-bottom">
-				<input id="name" class="uni-input" type="text" name="name" v-model="name" placeholder="请输入班级" />
+				<input id="name" class="uni-input" type="text" name="name" v-model="name" placeholder="请输入专业" />
 			</view>
-			<view class="uni-title  uni-common-pl">班级总人数</view>
+			<view class="uni-title  uni-common-pl">专业总人数</view>
 			<view class="uni-form-item dashed-bottom" style="">
-				<input id="student_sum" class="uni-input" type="number" name="student_sum" v-model="student_sum" placeholder="请输入班级总人数" />
+				<input id="student_sum" class="uni-input" type="number" name="student_sum" v-model="student_sum" placeholder="请输入专业总人数" />
 			</view>
 			<button @click="submit" form-type="submit" type="primary" size="mini"  class=" margin-top margin-lr">{{isedit?'修改':'添加'}}</button>
 			<button @click="cancel"  type="primary" size="mini" class="button margin-top margin-lr">取消</button>
