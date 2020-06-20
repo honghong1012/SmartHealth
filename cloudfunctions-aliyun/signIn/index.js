@@ -292,7 +292,7 @@ async function signUp(event) {
 	const gradeList = db.collection('grade_list') //  获取年级表
 	const academyList = db.collection('academy_list') //  获取专业表
 	// 学生
-	if(userType==1){
+	if(userType==1&&!(typeof(userInDB.data[0].major_id)=="undefined")){
 		let majorres = await majorList.where({
 			// 专业名
 			_id:userInDB.data[0].major_id

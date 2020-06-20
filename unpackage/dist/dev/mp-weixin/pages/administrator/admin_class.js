@@ -187,28 +187,29 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      tableList: [{
-        _id: "", // string，自生成--未处理
-        grade_id: 0, //所属年级ID
-        name: '胜利1班', //班级名称，如"994班"、"信计02"等
-        student_sum: 20, //当前班级总人数
-        order: 0 //int，同年级下的排序
-      },
-      {
-        _id: "", // string，自生成--未处理
-        grade_id: 1, //所属年级ID
-        name: '胜利2班', //班级名称，如"994班"、"信计02"等
-        student_sum: 30, //当前班级总人数
-        order: 1 //int，同年级下的排序
-      },
-      {
-        _id: "", // string，自生成--未处理
-        grade_id: 2, //所属年级ID
-        name: '胜利3班', //班级名称，如"994班"、"信计02"等
-        student_sum: 40, //当前班级总人数
-        order: 2 //int，同年级下的排序
-      }],
-
+      tableList: [
+        // {
+        // 	_id: "", // string，自生成--未处理
+        // 	grade_id: 0, //所属年级ID
+        // 	name: '胜利1班', //班级名称，如"994班"、"信计02"等
+        // 	student_sum: 20, //当前班级总人数
+        // 	order: 0, //int，同年级下的排序
+        // },
+        // {
+        // 	_id: "", // string，自生成--未处理
+        // 	grade_id: 1, //所属年级ID
+        // 	name: '胜利2班', //班级名称，如"994班"、"信计02"等
+        // 	student_sum: 30, //当前班级总人数
+        // 	order: 1, //int，同年级下的排序
+        // },
+        // {
+        // 	_id: "", // string，自生成--未处理
+        // 	grade_id: 2, //所属年级ID
+        // 	name: '胜利3班', //班级名称，如"994班"、"信计02"等
+        // 	student_sum: 40, //当前班级总人数
+        // 	order: 2, //int，同年级下的排序
+        // }
+      ],
       //_id: "", // string，自生成--未处理
       grade_id: "", //所属年级ID
       name: '', //班级名称，如"994班"、"信计02"等
@@ -261,9 +262,9 @@ __webpack_require__.r(__webpack_exports__);
 
         return false;
       }
-      uni.showLoading({
-        title: '提交中..' });
-
+      // uni.showLoading({
+      // 	title: '提交中..'
+      // })
       //利用this.isedit为true时，提示为修改。之后，把this.isedit修改为默认值false
       if (this.isedit == true) {
         // 修改
@@ -273,7 +274,7 @@ __webpack_require__.r(__webpack_exports__);
 
         delete this.list_item._id; //删除ID,更新内容不能带上ID
         this.list_item.name = this.name;
-        this.list_item.student_sum = this.student_sum,
+        this.list_item.student_sum = parseInt(this.student_sum),
         form.data = this.list_item;
         uni.showModal({
           title: '提示',
@@ -285,11 +286,17 @@ __webpack_require__.r(__webpack_exports__);
                 data: form }).
 
               then(function (res) {
+                uni.showLoading({
+                  title: '提交中..' });
+
                 uni.hideLoading();
                 // 重新获得列表
                 _this2.init();
               }).
               catch(function (err) {
+                uni.showLoading({
+                  title: '提交中..' });
+
                 uni.hideLoading();
                 console.error(err);
               });
@@ -301,7 +308,7 @@ __webpack_require__.r(__webpack_exports__);
         // 添加
         var info = {
           name: this.name,
-          student_sum: this.student_sum,
+          student_sum: parseInt(this.student_sum),
           order: this.tableList.length + 1,
           grade_id: this.grade_id };
 

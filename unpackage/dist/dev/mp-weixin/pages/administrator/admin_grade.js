@@ -243,9 +243,9 @@ __webpack_require__.r(__webpack_exports__);
 
         return false;
       }
-      uni.showLoading({
-        title: '提交中..' });
-
+      // uni.showLoading({
+      // 	title: '提交中..'
+      // })
       //利用this.isedit为true时，提示为修改。之后，把this.isedit修改为默认值false
       if (this.isedit == true) {
         // 修改
@@ -266,11 +266,17 @@ __webpack_require__.r(__webpack_exports__);
                 data: form }).
 
               then(function (res) {
+                uni.showLoading({
+                  title: '提交中..' });
+
                 uni.hideLoading();
                 // 重新获得列表
                 _this2.init();
               }).
               catch(function (err) {
+                uni.showLoading({
+                  title: '提交中..' });
+
                 uni.hideLoading();
                 console.error(err);
               });
@@ -297,11 +303,17 @@ __webpack_require__.r(__webpack_exports__);
                 data: info }).
 
               then(function (res) {
+                uni.showLoading({
+                  title: '提交中..' });
+
                 uni.hideLoading();
                 // 重新获得列表
                 _this2.init();
               }).
               catch(function (err) {
+                uni.showLoading({
+                  title: '提交中..' });
+
                 uni.hideLoading();
                 console.error(err);
               });
@@ -330,8 +342,6 @@ __webpack_require__.r(__webpack_exports__);
       this.isedit = true;
       // 待修改
       this.list_item = list_item;
-
-
     },
     del: function del(list_item) {var _this3 = this;
       // 此时的name是名字

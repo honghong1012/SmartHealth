@@ -107,9 +107,9 @@
 					});
 					return false;
 				}
-				uni.showLoading({
-					title: '提交中..'
-				})
+				// uni.showLoading({
+				// 	title: '提交中..'
+				// })
 				//利用this.isedit为true时，提示为修改。之后，把this.isedit修改为默认值false
 				if (this.isedit == true) {
 					// 修改
@@ -130,11 +130,17 @@
 										data: form
 									})
 									.then(res => {
+										uni.showLoading({
+											title: '提交中..'
+										})
 										uni.hideLoading();
 										// 重新获得列表
 										this.init()
 									})
 									.catch(err => {
+										uni.showLoading({
+											title: '提交中..'
+										})
 										uni.hideLoading();
 										console.error(err);
 									});
@@ -161,11 +167,17 @@
 										data: info
 									})
 									.then(res => {
+										uni.showLoading({
+											title: '提交中..'
+										})
 										uni.hideLoading();
 										// 重新获得列表
 										this.init()
 									})
 									.catch(err => {
+										uni.showLoading({
+											title: '提交中..'
+										})
 										uni.hideLoading();
 										console.error(err);
 									});
@@ -194,8 +206,6 @@
 				this.isedit = true;
 				// 待修改
 				this.list_item = list_item
-
-
 			},
 			del(list_item) {
 				// 此时的name是名字

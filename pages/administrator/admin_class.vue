@@ -22,7 +22,7 @@
 					<t-th align="left">总人数</t-th>
 					<t-th align="left">操作</t-th>
 				</t-tr>
-				<t-tr font-size="14" color="#494743" align="right" v-for="(item,index) of tableList" :key="item.id">
+				<t-tr font-size="14" color="#494743" align="right" v-for="(item,index) of tableList" :key="item._id">
 					<t-td align="left">{{ item.order }}</t-td>
 					<t-td align="left">{{ item.name }}</t-td>
 					<t-td align="left">{{ item.student_sum }}</t-td>
@@ -51,27 +51,28 @@
 		},
 		data() {
 			return {
-				tableList: [{
-						_id: "", // string，自生成--未处理
-						grade_id: 0, //所属年级ID
-						name: '胜利1班', //班级名称，如"994班"、"信计02"等
-						student_sum: 20, //当前班级总人数
-						order: 0, //int，同年级下的排序
-					},
-					{
-						_id: "", // string，自生成--未处理
-						grade_id: 1, //所属年级ID
-						name: '胜利2班', //班级名称，如"994班"、"信计02"等
-						student_sum: 30, //当前班级总人数
-						order: 1, //int，同年级下的排序
-					},
-					{
-						_id: "", // string，自生成--未处理
-						grade_id: 2, //所属年级ID
-						name: '胜利3班', //班级名称，如"994班"、"信计02"等
-						student_sum: 40, //当前班级总人数
-						order: 2, //int，同年级下的排序
-					}
+				tableList: [
+					// {
+					// 	_id: "", // string，自生成--未处理
+					// 	grade_id: 0, //所属年级ID
+					// 	name: '胜利1班', //班级名称，如"994班"、"信计02"等
+					// 	student_sum: 20, //当前班级总人数
+					// 	order: 0, //int，同年级下的排序
+					// },
+					// {
+					// 	_id: "", // string，自生成--未处理
+					// 	grade_id: 1, //所属年级ID
+					// 	name: '胜利2班', //班级名称，如"994班"、"信计02"等
+					// 	student_sum: 30, //当前班级总人数
+					// 	order: 1, //int，同年级下的排序
+					// },
+					// {
+					// 	_id: "", // string，自生成--未处理
+					// 	grade_id: 2, //所属年级ID
+					// 	name: '胜利3班', //班级名称，如"994班"、"信计02"等
+					// 	student_sum: 40, //当前班级总人数
+					// 	order: 2, //int，同年级下的排序
+					// }
 				],
 				//_id: "", // string，自生成--未处理
 				grade_id: "", //所属年级ID
@@ -125,9 +126,9 @@
 					});
 					return false;
 				}
-				uni.showLoading({
-					title: '提交中..'
-				})
+				// uni.showLoading({
+				// 	title: '提交中..'
+				// })
 				//利用this.isedit为true时，提示为修改。之后，把this.isedit修改为默认值false
 				if (this.isedit == true) {
 					// 修改
@@ -137,7 +138,7 @@
 					}
 					delete this.list_item._id //删除ID,更新内容不能带上ID
 					this.list_item.name = this.name
-					this.list_item.student_sum = this.student_sum,
+					this.list_item.student_sum = parseInt(this.student_sum),
 					form.data = this.list_item
 					uni.showModal({
 						title: '提示',
@@ -149,11 +150,17 @@
 										data: form
 									})
 									.then(res => {
+										uni.showLoading({
+											title: '提交中..'
+										})
 										uni.hideLoading();
 										// 重新获得列表
 										this.init()
 									})
 									.catch(err => {
+										uni.showLoading({
+											title: '提交中..'
+										})
 										uni.hideLoading();
 										console.error(err);
 									});
@@ -165,7 +172,7 @@
 					// 添加
 					var info = {
 						name: this.name,
-						student_sum: this.student_sum,
+						student_sum: parseInt(this.student_sum),
 						order: this.tableList.length + 1,
 						grade_id: this.grade_id
 					}
