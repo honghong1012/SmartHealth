@@ -12,7 +12,7 @@
 				<input id="student_sum" class="uni-input" type="number" name="student_sum" v-model="student_sum" placeholder="请输入专业总人数" />
 			</view>
 			<button @click="submit" form-type="submit" type="primary" size="mini"  class=" margin-top margin-lr">{{isedit?'修改':'添加'}}</button>
-			<button @click="cancel"  type="primary" size="mini" class="button margin-top margin-lr">取消</button>
+			<button @click="cancel"  type="warn" size="mini" class="button margin-top margin-lr">取消</button>
 		</form>
 		<view class="box" style="margin-top:50rpx ;">
 			<t-table border="3" border-color="#e6e5e5">

@@ -26,7 +26,7 @@ exports.main = async (event, context) => {
 			    let majorRes = await majorCol.where({
 			        grade_id:gradeRes.data[j]._id
 			    }).orderBy("order","asc").get()
-			      
+			    
 			    console.log("major_res",majorRes)
 				// major键为年级id，值为该年级下的专业记录
 			    resData[gradeRes.data[j]._id] = majorRes.data

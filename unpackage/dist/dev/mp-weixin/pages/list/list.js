@@ -204,6 +204,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var myDate = new Date();
 var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate.getDate() + 1);var _default =
 {
@@ -218,10 +232,14 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
       arr: [], //  学生的日健康统计数组
       gradeList: [], // 该学院下的年级列表
       majorList: [], // 该年级下的专业列表
+      majorArr: [], // 特定年级下的专业
+      majorIndex: "", // 专业索引
+      majorName: '',
       gradeArr: [], // 特定学院下的年级
       gradeIndex: "", // 年级索引
       gradeName: '',
-      selected_grade_id: '' // 下拉框选择的年级id
+      selected_grade_id: '', // 下拉框选择的年级id
+      selected_major_id: '' // 下拉框选择的专业id
     };
   },
   components: {
@@ -269,6 +287,16 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
       this.gradeArr = this.gradeList[this.academy_id];
       this.gradeName = this.gradeArr[this.gradeIndex].name;
       this.selected_grade_id = this.gradeArr[this.gradeIndex]._id;
+      this.majorName = '';
+      this.majorArr = [];
+      this.selected_major_id = '';
+    },
+    selectmajorChange: function selectmajorChange(e) {
+      console.log(e.target.value);
+      this.majorIndex = e.target.value;
+      this.majorArr = this.majorList[this.selected_grade_id];
+      this.majorName = this.majorArr[this.majorIndex].name;
+      this.selected_major_id = this.majorArr[this.majorIndex]._id;
     },
     change: function change(e) {
       console.log(e);
@@ -289,7 +317,9 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
       uniCloud.callFunction({
         name: 'query_reports',
         data: {
+          academy_id: this.academy_id,
           grade_id: this.selected_grade_id,
+          major_id: this.selected_major_id,
           time: start,
           time2: start2 } }).
 
@@ -323,6 +353,12 @@ var time2 = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + (myDate
         uni.hideLoading();
         console.error(err);
       });
+    },
+    clear: function clear() {
+      this.gradeName = '';
+      this.majorName = '';
+      this.selected_grade_id = '';
+      this.selected_major_id = '';
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 21)["default"]))
 

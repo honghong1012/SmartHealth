@@ -133,7 +133,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -231,9 +243,17 @@ var _default =
     return {
       checked: false,
       checkeds: false,
+      gradeList: [], // 该学院下的年级列表
+      majorList: [], // 该年级下的专业列表
       student: {
         stu_num: "",
-        stu_name: "" },
+        stu_name: "",
+        academy_name: "",
+        grade_name: "",
+        major_name: "",
+        major_id: "",
+        grade_id: "",
+        academy_id: "" },
 
       items: [{
         value: '良好',
@@ -254,8 +274,57 @@ var _default =
 
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
+    //获取该学院的名字
+    uniCloud.callFunction({
+      name: 'getAcademyName',
+      data: {
+        academy_id: uni.getStorageSync("academy_id") } }).
+
+
+    then(function (res) {
+      console.log(res);
+      _this.student.academy_name = res.result;
+    }).
+    catch(function (err) {
+      uni.hideLoading();
+      console.error(err);
+    });
+    //获取年级名字
+    uniCloud.callFunction({
+      name: 'getGradeName',
+      data: {
+        grade_id: uni.getStorageSync("grade_id") } }).
+
+
+    then(function (res) {
+      console.log(res);
+      _this.student.grade_name = res.result;
+    }).
+    catch(function (err) {
+      uni.hideLoading();
+      console.error(err);
+    });
+    //获取专业名字
+    uniCloud.callFunction({
+      name: 'getMajorName',
+      data: {
+        major_id: uni.getStorageSync("major_id") } }).
+
+
+    then(function (res) {
+      console.log(res);
+      _this.student.major_name = res.result;
+    }).
+    catch(function (err) {
+      uni.hideLoading();
+      console.error(err);
+    });
+
     if (uni.getStorageSync('token')) {
+      this.student.major_id = uni.getStorageSync("major_id");
+      this.student.grade_id = uni.getStorageSync("grade_id");
+      this.student.academy_id = uni.getStorageSync("academy_id");
       this.student.stu_name = uni.getStorageSync("stu_name");
       this.student.stu_num = uni.getStorageSync("stu_num");
     } else {
@@ -268,10 +337,10 @@ var _default =
     formSubmit: function formSubmit(e) {
       //major_id、grade_id、academy_id需要动态读取
       var data = {
-        stu_id: this.student.stu_num,
-        major_id: uni.getStorageSync("major_id"),
-        grade_id: uni.getStorageSync("grade_id"),
-        academy_id: uni.getStorageSync("academy_id"),
+        //stu_id: this.student.stu_num,
+        major_id: this.student.major_id,
+        grade_id: this.student.grade_id,
+        academy_id: this.student.academy_id,
         create_time: Date.now() };
 
       var formData = e.detail.value,
@@ -335,7 +404,7 @@ var _default =
         }
       }
     } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 21)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 21)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

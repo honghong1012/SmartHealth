@@ -11,10 +11,21 @@
 		                <view class="uni-input">{{gradeName}}</view>
 		            </picker>
 		        </view>
-				<view class="buttonGroup">
-				    <button type="primary" @click="confirm">确定</button>
+			</view>
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+				    选择专业
 				</view>
-		    </view>
+				<view class="uni-list-cell-db">
+				    <picker @change="selectmajorChange" :value="majorIndex" :range="majorArr" range-key="name">
+				        <view class="uni-input">{{majorName}}</view>
+				    </picker>
+				</view>
+			</view>
+			<view class="button-sp-area">
+				<button class="button margin-top margin-lr" type="primary" @click="confirm" size="mini">确定</button>
+				<button class="button margin-top margin-lr" type="warn" @click="clear" size="mini">清空</button>
+			</view>
 		</view>
 		<view class="collect">
 			已统计
@@ -37,13 +48,16 @@
 			<view class="top">
 				<view class="id">学号:{{ item.stu_num }}</view>
 				<view class="name">姓名:{{ item.stu_name }}</view>
+				<view class="name">学院:{{ item.academy_name }}</view>
+				<view class="name">年级:{{ item.grade_name }}</view>
+				<view class="name">专业:{{ item.major_name }}</view>
 				<view class="name" >健康状态:
                     <view :style="{color:item.health == '良好'?'#1aad19':'#f00'}">{{ item.health }}</view>
                 </view>
 			</view>
 			<view class="top">
 				{{ item.current_pos == 2 ? '在湖北' : item.current_pos == 1 ? '在外地' : '在本地' }}, 今日体温:{{ item.temperature }},
-				{{ item.contact_virus == 0 ? '未接触湖北地区人员' : '接触过湖北地区人员' }}, {{ item.have_symptom == 0 ? '无疑似症状' : '出现过疑似症状' }}
+				{{ item.contact_virus == 0 ? '未接触北京地区人员' : '接触过北京地区人员' }}, {{ item.have_symptom == 0 ? '无疑似症状' : '出现过疑似症状' }}
 			</view>
 		</view>
 		<view v-if="selectTime == true" class="time">
@@ -71,10 +85,14 @@ export default {
 			arr: [] ,//  学生的日健康统计数组
 			gradeList: [], // 该学院下的年级列表
 			majorList: [], // 该年级下的专业列表
+			majorArr: [], // 特定年级下的专业
+			majorIndex: "", // 专业索引
+			majorName:'',
 			gradeArr: [], // 特定学院下的年级
 			gradeIndex: "", // 年级索引
 			gradeName:'',
 			selected_grade_id:'', // 下拉框选择的年级id
+			selected_major_id:'', // 下拉框选择的专业id
 		};
 	},
 	components: {
@@ -122,6 +140,16 @@ export default {
 			this.gradeArr = this.gradeList[this.academy_id]
 		    this.gradeName = this.gradeArr[this.gradeIndex].name
 			this.selected_grade_id = this.gradeArr[this.gradeIndex]._id
+			this.majorName = ''
+			this.majorArr = []
+			this.selected_major_id = ''
+		},
+		selectmajorChange: function(e) {
+		    console.log(e.target.value)
+		    this.majorIndex = e.target.value
+			this.majorArr = this.majorList[this.selected_grade_id]
+		    this.majorName = this.majorArr[this.majorIndex].name
+			this.selected_major_id = this.majorArr[this.majorIndex]._id
 		},
 		change(e) {
 			console.log(e);
@@ -142,7 +170,9 @@ export default {
 			uniCloud.callFunction({
 					name: 'query_reports',
 					data: {
+						academy_id: this.academy_id,
 						grade_id: this.selected_grade_id,
+						major_id: this.selected_major_id,
 						time: start,
 						time2: start2
 					}
@@ -176,6 +206,12 @@ export default {
 					uni.hideLoading();
 					console.error(err);
 				});
+		},
+		clear: function(){
+			this.gradeName = '';
+			this.majorName = '';
+			this.selected_grade_id = '';
+			this.selected_major_id = '';
 		}
 	}
 };

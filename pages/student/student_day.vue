@@ -9,12 +9,24 @@
 			<view class="uni-form-item uni-column dashed-bottom">
 				<input class="uni-input" v-model="student.stu_name" name="stu_name" placeholder="请输入姓名" />
 			</view>
+			<view class="uni-title  uni-common-pl">学院</view>
+			<view class="uni-form-item uni-column dashed-bottom">
+				<input class="uni-input" v-model="student.academy_name" name="academy_name" placeholder="请输入学院" />
+			</view>
+			<view class="uni-title  uni-common-pl">年级</view>
+			<view class="uni-form-item uni-column dashed-bottom">
+				<input class="uni-input" v-model="student.grade_name" name="grade_name" placeholder="请输入年级" />
+			</view>
+			<view class="uni-title  uni-common-pl">专业</view>
+			<view class="uni-form-item uni-column dashed-bottom">
+				<input class="uni-input" v-model="student.major_name" name="major_name" placeholder="请输入专业" />
+			</view>
 			<view class="uni-title  uni-common-pl">今日体温</view>
 			<view class="uni-form-item uni-column dashed-bottom">
 				<input class="uni-input" name="temperature" type="digit" placeholder="请输入今日体温℃" />
 			</view>
 			<view class="uni-title  uni-common-pl margin-top text-bold text-center">选择项</view>
-			<view class="uni-title  uni-common-pl">有无接触湖北/武汉人员</view>
+			<view class="uni-title  uni-common-pl">有无接触北京人员</view>
 			<view class="uni-list">
 				<radio-group name="contact_virus">
 					<label class="uni-list-cell uni-list-cell-pd">
@@ -61,13 +73,13 @@
 						<view>
 							<radio value="1" />
 						</view>
-						<view class="k_left">外地（除湖北）</view>
+						<view class="k_left">外地（除北京）</view>
 					</label>
 					<label class="uni-list-cell uni-list-cell-pd">
 						<view>
 							<radio value="2" />
 						</view>
-						<view class="k_left">外地（湖北）</view>
+						<view class="k_left">北京</view>
 					</label>
 				</radio-group>
 			</view>
@@ -96,9 +108,17 @@
 			return {
 				checked: false,
 				checkeds: false,
+				gradeList: [], // 该学院下的年级列表
+				majorList: [], // 该年级下的专业列表
 				student: {
 					stu_num: "",
-					stu_name: ""
+					stu_name: "",
+					academy_name: "",
+					grade_name: "",
+					major_name: "",
+					major_id: "",
+					grade_id: "",
+					academy_id: ""
 				},
 				items: [{
 						value: '良好',
@@ -120,7 +140,56 @@
 			}
 		},
 		onLoad: function() {
+			//获取该学院的名字
+			uniCloud.callFunction({
+			    name: 'getAcademyName',
+				data: {
+					academy_id: uni.getStorageSync("academy_id"),
+				}
+			})
+			.then(res => {
+			    console.log(res);
+				this.student.academy_name = res.result
+			})
+			.catch(err => {
+			    uni.hideLoading();
+			    console.error(err);
+			});
+			//获取年级名字
+			uniCloud.callFunction({
+			    name: 'getGradeName',
+				data: {
+					grade_id: uni.getStorageSync("grade_id"),
+				}
+			})
+			.then(res => {
+			    console.log(res);
+				this.student.grade_name = res.result
+			})
+			.catch(err => {
+			    uni.hideLoading();
+			    console.error(err);
+			});
+			//获取专业名字
+			uniCloud.callFunction({
+			    name: 'getMajorName',
+				data: {
+					major_id: uni.getStorageSync("major_id"),
+				}
+			})
+			.then(res => {
+			    console.log(res);
+				this.student.major_name = res.result
+			})
+			.catch(err => {
+			    uni.hideLoading();
+			    console.error(err);
+			});
+			
 			if (uni.getStorageSync('token')) {
+				this.student.major_id = uni.getStorageSync("major_id")
+				this.student.grade_id = uni.getStorageSync("grade_id")
+				this.student.academy_id = uni.getStorageSync("academy_id")
 				this.student.stu_name = uni.getStorageSync("stu_name")
 				this.student.stu_num = uni.getStorageSync("stu_num")
 			} else {
@@ -133,10 +202,10 @@
 			formSubmit: function(e) {
 				//major_id、grade_id、academy_id需要动态读取
 				var data = {
-					stu_id: this.student.stu_num,
-					major_id: uni.getStorageSync("major_id"),
-					grade_id: uni.getStorageSync("grade_id"),
-					academy_id: uni.getStorageSync("academy_id"),
+					//stu_id: this.student.stu_num,
+					major_id: this.student.major_id,
+					grade_id: this.student.grade_id,
+					academy_id: this.student.academy_id,
 					create_time: Date.now()
 				}
 				var formData = e.detail.value,
