@@ -276,7 +276,6 @@ async function wexinSingUp(event) {
 	const userOptionDB = {
 		0:'teachers',
 		1:'students',
-		2:'parents',
 	};
 	const userDBkye = userOptionDB[event.userType];
 
@@ -288,25 +287,32 @@ async function wexinSingUp(event) {
 	const userInDB = await db.collection(userDBkye).where({
 		openid
 	}).get();
-	if (userInDB.data && userInDB.data.length > 0) {
-		return {
-			status: -1,
-			msg: '已经注册，请直接登录'
-		}
-	}
+	// if (userInDB.data && userInDB.data.length > 0) {
+	// 	return {
+	// 		status: -1,
+	// 		msg: '已经注册，请直接登录'
+	// 	}
+	// }
 	
-	// 用户名判断
-	const userNameInfo  = await db.collection(userDBkye).where({username:event.username}).get();
-	// 用户名判断
-	if (userNameInfo.data && userNameInfo.data.length > 0) {
-		return {
-			status: -1,
-			msg: '此用户名已存在'
-		}
-	}
+	// // 用户名判断
+	// const userNameInfo  = await db.collection(userDBkye).where({username:event.username}).get();
+	// // 用户名判断
+	// if (userNameInfo.data && userNameInfo.data.length > 0) {
+	// 	return {
+	// 		status: -1,
+	// 		msg: '此用户名已存在'
+	// 	}
+	// }
 	
 	let userUpdateResult;
 	if (userInDB.data && userInDB.data.length === 0) {
+		// 老师不能注册
+		if (userType == 0){
+			return {
+				status: -1,
+				msg: '老师不能注册！'
+			}
+		}
 		userUpdateResult = await db.collection(userDBkye).add({
 			...userInfo,
 			username:event.username,
@@ -315,6 +321,13 @@ async function wexinSingUp(event) {
 			exp: Date.now() + tokenExp
 		});
 	} 
+	// 不是新用户输出已存在，status为-1
+	else {
+		return {
+			status: -1,
+			msg: '此用户名已存在'
+		}
+	}
 
 	if (userUpdateResult.id || userUpdateResult.affectedDocs === 1) {
 		return {

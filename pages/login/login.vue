@@ -1,9 +1,8 @@
-<!-- 用户登录 邯郸-前端-秦少卫 -->
 <template>
 	<div>
 		<view class="container">
 			<view class="title">
-				<text>{{school}}学生健康报备系统</text>
+				<text>{{school}}健康信息平台</text>
 			</view>
 
 			<wuc-tab textFlex :tab-list="tabList" :tabCur.sync="userType" tab-class="text-center text-black bg-white swiper-title"
@@ -109,15 +108,20 @@
 					// 	showCancel: false
 					// })
 					// showModel无法同步输出
+					if (res.result.status !== 0) {
+						uni.showToast({
+						    icon:"none",
+						    title:"登录失败",
+						})
+						uni.hideLoading()
+						console.log('返回的', res);
+						return Promise.reject(new Error(res.result.msg))
+					}
 					uni.showToast({
 					    icon:"none",
 					    title:"登录成功",
 					})
-					console.log('返回的', res);
 					uni.hideLoading()
-					if (res.result.status !== 0) {
-						return Promise.reject(new Error(res.result.msg))
-					}
 					uni.setStorageSync('token', res.result.token)
 					uni.setStorageSync('uid', res.result.uid)
 					uni.setStorageSync("userType", this.userType)

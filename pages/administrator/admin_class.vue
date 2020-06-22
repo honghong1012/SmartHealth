@@ -1,4 +1,3 @@
-<!-- 管理员管理班级信息 江西-前端-Ran -->
 <template>
 	<view class="warp" style="margin-top:50rpx ;">
 		<view align="center">管理专业信息</view>

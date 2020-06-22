@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="text-area">
 			<view style="margin-top: 100upx;margin-bottom: 100upx;">
-				<text class="title" style ="font-size: 30px;">{{school}}学生健康报备系统</text>
+				<text class="title" style ="font-size: 30px;">{{school}}健康信息平台</text>
 			</view>
 			<!-- <div class="tipText">
 				<text>{{userText}}您好</text>

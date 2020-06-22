@@ -1,4 +1,3 @@
-<!-- 每日健康统计汇总 深圳-前端-张昊 -->
 <template>
 	<view class="body">
 		<view class="uni-list" style="margin-top: 30px;">
@@ -22,11 +21,13 @@
 				    </picker>
 				</view>
 			</view>
-			<view class="button-sp-area">
+		</view>
+		
+		<view class="button-sp-area">
 				<button class="button margin-top margin-lr" type="primary" @click="confirm" size="mini">确定</button>
 				<button class="button margin-top margin-lr" type="warn" @click="clear" size="mini">清空</button>
-			</view>
 		</view>
+		
 		<view class="collect">
 			已统计
 			<span>{{ stat }}</span>
@@ -38,6 +39,7 @@
 				<span>{{ time }}</span>
 			</view>
 		</view>
+		
 		<view
 			:style="{ color: item.temperature > 37 || item.contact_like_virus == 1 || item.Suspected_symptoms == 1 ? '#f00' : '#000' }"
 			class="list"
@@ -45,26 +47,30 @@
 			v-for="(item, index) in arr"
 			:key="index"
 		>
-			<view class="top">
-				<view class="id">学号:{{ item.stu_num }}</view>
-				<view class="name">姓名:{{ item.stu_name }}</view>
-				<view class="name">学院:{{ item.academy_name }}</view>
-				<view class="name">年级:{{ item.grade_name }}</view>
-				<view class="name">专业:{{ item.major_name }}</view>
-				<view class="name" >健康状态:
-                    <view :style="{color:item.health == '良好'?'#1aad19':'#f00'}">{{ item.health }}</view>
-                </view>
-			</view>
-			<view class="top">
-				{{ item.current_pos == 2 ? '在湖北' : item.current_pos == 1 ? '在外地' : '在本地' }}, 今日体温:{{ item.temperature }},
-				{{ item.contact_virus == 0 ? '未接触北京地区人员' : '接触过北京地区人员' }}, {{ item.have_symptom == 0 ? '无疑似症状' : '出现过疑似症状' }}
-			</view>
+		
+		<view class="top">
+			<view class="id">学号:{{ item.stu_num }}</view>
+			<view class="name">姓名:{{ item.stu_name }}</view>
+			<view class="name">学院:{{ item.academy_name }}</view>
+			<view class="name">年级:{{ item.grade_name }}</view>
+			<view class="name">专业:{{ item.major_name }}</view>
+			<view class="name" >健康状态:
+                <view :style="{color:item.health == '良好'?'#1aad19':'#f00'}">{{ item.health }}</view>
+            </view>
 		</view>
+		
+		<view class="top">
+			{{ item.current_pos == 2 ? '在湖北' : item.current_pos == 1 ? '在外地' : '在本地' }}, 今日体温:{{ item.temperature }},
+			{{ item.contact_virus == 0 ? '未接触北京地区人员' : '接触过北京地区人员' }}, {{ item.have_symptom == 0 ? '无疑似症状' : '出现过疑似症状' }}
+		</view>
+		
 		<view v-if="selectTime == true" class="time">
 			<view class="masking" @click="selectTime = false"></view>
 			<uni-calendar class="calendars" :insert="true" :lunar="true" :start-date="'2019-3-2'" :end-date="'2019-5-20'" @change="change"></uni-calendar>
 		</view>
+		
 		<view v-if="arr.length == 0" class="null">该日期未登记健康状态</view>
+		
 	</view>
 </template>
 
@@ -98,9 +104,9 @@ export default {
 	components: {
 		uniCalendar
 	},
-	onLoad(data) {
+	onLoad() {
+		this.academy_id = uni.getStorageSync('academy_id')
 		if (uni.getStorageSync('token')) {
-			this.academy_id = uni.getStorageSync('academy_id')
 			this.time = myDate.getFullYear() + '/' + (myDate.getMonth() + 1) + '/' + myDate.getDate();
 			// this.http();
 		}else{
@@ -115,6 +121,7 @@ export default {
 		.then(res => {
 		    console.log(res);
 			this.gradeList = res.result
+			this.gradeArr = this.gradeList[this.academy_id]
 		})
 		.catch(err => {
 		    uni.hideLoading();
@@ -137,17 +144,15 @@ export default {
 		selectgradeChange: function(e) {
 		    console.log(e.target.value)
 		    this.gradeIndex = e.target.value
-			this.gradeArr = this.gradeList[this.academy_id]
 		    this.gradeName = this.gradeArr[this.gradeIndex].name
 			this.selected_grade_id = this.gradeArr[this.gradeIndex]._id
+			this.majorArr = this.majorList[this.selected_grade_id]
 			this.majorName = ''
-			this.majorArr = []
 			this.selected_major_id = ''
 		},
 		selectmajorChange: function(e) {
 		    console.log(e.target.value)
 		    this.majorIndex = e.target.value
-			this.majorArr = this.majorList[this.selected_grade_id]
 		    this.majorName = this.majorArr[this.majorIndex].name
 			this.selected_major_id = this.majorArr[this.majorIndex]._id
 		},
@@ -157,7 +162,7 @@ export default {
 			let str = e.year + '/' + e.month + '/' + e.date;
 			if (this.time != str) {
 				this.time = str;
-				this.http();
+				//this.http();
 			}
 			this.selectTime = false;
 		},

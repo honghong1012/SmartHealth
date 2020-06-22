@@ -1,4 +1,3 @@
-<!-- 管理员管理年级信息 江西-前端-Ran -->
 <template>
 	<view class="warp" style="margin-top:50rpx ;">
 		<view align="center">管理年级信息</view>

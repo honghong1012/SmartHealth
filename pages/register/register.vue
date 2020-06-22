@@ -1,9 +1,8 @@
-<!-- 用户注册 邯郸-前端-秦少卫 -->
 <template>
 	<view>
 		<view class="container">
 			<view class="title">
-				<text>{{school}}学生健康报备系统</text>
+				<text>{{school}}健康信息平台</text>
 			</view>
 			<wuc-tab textFlex :tab-list="tabList" :tabCur.sync="userType" tab-class="text-center text-black bg-white swiper-title" select-class="text-blue" />
 			<swiper :current="userType" class="swiper" duration="300" :circular="true" indicator-color="rgba(255,255,255,0)"
@@ -12,13 +11,13 @@
 				<!-- 辅导员 -->
 				<swiper-item key="teacher">
 					<view class="desc">
-						<view>辅导员模式,管理班级等信息</view>
+						<view>辅导员模式,管理学院等信息</view>
 					</view>
 				</swiper-item>
 				<!-- 学生 -->
 				<swiper-item key="students">
 					<view class="desc ">
-						<view>学生注册后可关联自己的班级上报健康状况</view>
+						<view>学生注册后可关联自己的信息上报健康状况</view>
 					</view>
 				</swiper-item>
 			</swiper>

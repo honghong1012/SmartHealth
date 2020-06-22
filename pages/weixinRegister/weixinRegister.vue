@@ -1,32 +1,24 @@
-<!-- 微信注册 邯郸-前端-秦少卫 -->
 <template>
 	<div>
 		<view class="container">
 			<view class="title">
-				<text>学生报备系统</text>
+				<text>健康信息平台</text>
 			</view>
 
 			<wuc-tab textFlex :tab-list="tabList" :tabCur.sync="userType" tab-class="text-center text-black bg-white swiper-title" select-class="text-blue" />
 			<swiper :current="userType" class="swiper" duration="300" :circular="true" indicator-color="rgba(255,255,255,0)"
 			 indicator-active-color="rgba(255,255,255,0)">
-				<!-- 老师 -->
+				<!-- 辅导员 -->
 				<swiper-item key="teacher">
 					<view class="desc">
-						<view>老师注册后可查看自己班级的学生监控状况</view>
+						<view>辅导员模式,管理学院等信息</view>
 					</view>
 				</swiper-item>
 				
 				<!-- 学生 -->
 				<swiper-item key="students">
 					<view class="desc">
-						<view>学生注册后可关联自己的班级上报健康状况</view>
-					</view>
-				</swiper-item>
-
-				<!-- 家长 -->
-				<swiper-item key="parents">
-					<view class="desc">
-						<view>家长注册可辅助学生进行监控状况填写</view>
+						<view>学生注册后可关联自己的信息上报健康状况</view>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -37,7 +29,7 @@
 				<div class="buttonGroup">
 					<button type="primary" @click="bindUser">绑定</button>
 				</div>
-				<navigator url="/pages/login/login" class="linkBtn" >
+				<navigator class="linkBtn" @click="returnLogin" >
 					<text>已有账号？点击登录 </text>
 				</navigator>
 			</view>
@@ -63,10 +55,6 @@
 						name: '学生',
 						icon: 'cuIcon-dianhua'
 					},
-					{
-						name: '家长',
-						icon: 'cuIcon-wifi'
-					}
 				],
 				userType: 0,
 			};
@@ -79,6 +67,11 @@
 		onLoad() {
 		},
 		methods: {
+			returnLogin() {
+				uni.switchTab({
+					url: '/pages/login/login'
+				});
+			},
 			tabChange(index) {
 				this.userType = index;
 			},
