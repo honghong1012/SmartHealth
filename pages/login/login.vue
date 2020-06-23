@@ -34,6 +34,14 @@
 						<text>没有账号？前往注册 </text>
 					</navigator>
 				</view>
+				<!-- #ifdef MP-WEIXIN -->
+				<view class="weixinBtn">
+					<text>其他方式直接登录</text>
+					<navigator class="linkBtn" @click="weixinlogin">
+						<uni-icons color="#89dd4d" type="weixin" size="40"></uni-icons>
+					</navigator>
+				</view>
+				<!-- #endif -->
 			</view>
 		</view>
 	</div>
@@ -103,11 +111,6 @@
 						userType,
 					},
 				}).then((res) => {
-					// uni.showModal({
-					// 	content: '登录成功',
-					// 	showCancel: false
-					// })
-					// showModel无法同步输出
 					if (res.result.status !== 0) {
 						uni.showToast({
 						    icon:"none",
@@ -135,23 +138,13 @@
 							uni.navigateTo({
 								url: '/pages/index/index'
 							});
-								break;
+							break;
 							case 1:
 							// 学生无专业id则跳转绑定
 							uni.navigateTo({
 								url: '/pages/student_bind/student_bind'
 							})
-								break;
-							// case 2:
-							// uni.navigateTo({
-							// 	url: '/pages/student_bind/student_bind'
-							// })
-							// 	break;
-							// case 3:
-							// uni.navigateTo({
-							// 	url: '/pages/administrator/admin_grade'
-							// })
-							// 	break;
+							break;
 						}
 					} 
 					// 有专业id，则不需要绑定
@@ -227,6 +220,106 @@
 							reject(new Error('微信登录失败'))
 						}
 					})
+				})
+			},
+			weixinlogin(){
+				uni.login({
+				    provider: 'weixin',
+				    success: function(loginRes) {
+				        let code = loginRes.code
+				            //获取相关信息
+				        uni.getUserInfo({
+				            provider: 'weixin',
+				            success: function(infoRes) { //获取用户信息后向调用信息更新方法
+				                this.username = infoRes.userInfo.nickName; //昵称
+								this.password = this.username
+				                let avatarUrl = infoRes.userInfo.avatarUrl; //头像
+				            }
+				        });
+						// 调用云函数signin
+						uniCloud.callFunction({
+							name: 'signIn',
+							data: {
+								username:this.username,
+								password:this.password,
+								userType:1,//学生
+							},
+						}).then((res) => {
+							if (res.result.status !== 0) {
+								uniCloud.callFunction({
+									name: 'signUp',
+									data: {
+										username:this.username,
+										password:this.password,
+										userType:1,//学生
+									},
+								}).then((res) => {
+									uni.hideLoading()
+									if (res.result.status !== 0) {
+										return Promise.reject(new Error(res.result.msg))
+									}
+									uni.setStorageSync('token', res.result.token)
+								}).catch((err) => {
+									console.log(err);
+									uni.showModal({
+										content: '注册失败，' + err.message,
+										showCancel: false
+									})
+									uni.hideLoading()
+								})
+								console.log('返回的', res);
+							}
+							
+							uni.showToast({
+								icon:"none",
+								title:"登录成功",
+							})
+							uni.hideLoading()
+							uni.setStorageSync('token', res.result.token)
+							uni.setStorageSync('uid', res.result.uid)
+							uni.setStorageSync("userType", this.userType)
+							uni.setStorageSync("username",this.username)
+							// 返回值无专业id，则需要绑定（新注册用户）
+							if (!res.result.major_id) {
+								switch (this.userType){
+									case 0:
+									// 老师则不需绑定，直接到主页面
+									uni.setStorageSync("academy_id",res.result.academy_id)
+									uni.navigateTo({
+										url: '/pages/index/index'
+									});
+									break;
+									case 1:
+									// 学生无专业id则跳转绑定
+									uni.navigateTo({
+										url: '/pages/student_bind/student_bind'
+									})
+									break;
+								}
+							}
+							// 有专业id，则不需要绑定
+							else {
+								uni.setStorageSync("major_id", res.result.major_id)
+								uni.setStorageSync("grade_id", res.result.grade_id)
+								uni.setStorageSync("academy_id",res.result.academy_id)
+								if (this.userType == 1) {
+									uni.setStorageSync("stu_num", res.result.stu_num)
+									uni.setStorageSync("stu_name", res.result.stu_name)
+								}
+								// 跳回index页面
+								uni.navigateTo({
+									url: '/pages/index/index'
+								});
+							}
+						}).catch((err) => {
+							console.log(err);
+							uni.hideLoading()
+							uni.showModal({
+								content: '登录失败，' + err.message,
+								showCancel: false
+							})
+						})
+				    },
 				})
 			},
 			validateToken() {

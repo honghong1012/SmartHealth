@@ -35,12 +35,12 @@
 				</navigator>
 
 				<!-- #ifdef MP-WEIXIN -->
-				<div class="weixinBtn">
-					<div>其他方式注册</div>
+				<!-- <div class="weixinBtn">
+					<div>其他方式直接登录</div>
 					<navigator url="/pages/weixinRegister/weixinRegister" >
-						<uni-icons type="weixin" color="#007AFF" size="30"></uni-icons>
+						<uni-icons type="weixin" color="#89dd4d" size="30"></uni-icons>
 					</navigator>
-				</div>
+				</div> -->
 				<!-- #endif -->
 			</view>
 		</view>
@@ -65,14 +65,6 @@
 				 	 			name: '学生',
 				 	 			icon: 'cuIcon-dianhua'
 				 	 		},
-				 		// 	{
-				 		// 		name: '家长',
-				 		// 		icon: 'cuIcon-wifi'
-				 		// 	},
-				 	 // 		{
-				 	 // 			name: '管理员',
-				 	 // 			icon: 'cuIcon-wifi'
-							// }
 				],
 				userType: 0,
 				school:''
@@ -111,13 +103,6 @@
 					})
 					return 
 				}
-				// if(username.indexOf('admin')  && this.userType == 3){
-				// 	uni.showModal({
-				// 		content: '您不是管理，请离开',
-				// 		showCancel: false
-				// 	})
-				// 	return 
-				// }
 				console.log(userType);
 				uni.showLoading({
 					title: '注册中...'
