@@ -1,4 +1,4 @@
-基于码云gitee项目https://gitee.com/dcloud/xinguan2020-xuesheng二次开发
+基于码云gitee项目 https://gitee.com/dcloud/xinguan2020-xuesheng 二次开发
 
 
 ### 空间与小程序appID设置
