@@ -27,6 +27,7 @@
 ### 登录界面
 
 学生可自行注册登录，老师目前后台数据库注册了信息学院和电子科学与技术学院老师
+
 用户名：信息学院                          密码：12345678
 用户名：电子科学与技术学院          密码：12345678
 
@@ -40,8 +41,6 @@
 
 绑定信息后，便可以进入每日登记健康信息的界面进行体温等健康信息的登记
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%874.jpg)
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%875.jpg)
 
 ### 老师端
 进入老师端口后，老师可以对学生的名单进行管理以及查看学生报备上了的总数据
@@ -55,7 +54,6 @@
 
 查看学生报备情况时可以选择相应的班级/年级查看实时学生信息报备的情况
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%879.png)
 
 此外，还可以在登陆界面查看全国以及全球实时疫情状况，了解疫情的实时情况。此模块用了网上的接口，运用反向代理实现页面跳转，但因为非企业小程序无法使用反向代理的业务域名，所以体验版无法展示疫情动态实时信息，截图取自开发者工具的预览。
 
