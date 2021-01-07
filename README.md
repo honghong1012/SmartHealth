@@ -1,6 +1,3 @@
-基于码云gitee项目 https://gitee.com/dcloud/xinguan2020-xuesheng 二次开发
-
-
 ### 空间与小程序appID设置
 - 在`main.js`中设置空间的`spaceId`、`clientSecret`；
 - 在`manifest.json`中设置微信小程序的`appID`，否则微信端获取的code为：`the code is a mock one`；
