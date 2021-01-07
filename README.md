@@ -24,7 +24,11 @@
 - 项目前端基于uni-app框架开发，它是一个通过vue.js编写所有平台应用的多端框架。你需要了解uni-app以便于更深度的定制。uni-app的文档详见：[https://uniapp.dcloud.io/README](https://uniapp.dcloud.io/README)
 - 项目后端基于uniCloud，它是一个基于js的云开发模式，与微信、支付宝小程序的云开发类似，但可以跨端使用。它基于serverless模型，优势众多。建议开发者通读一遍uniCloud的介绍和快速上手，以方便做二次开发。uniCloud的文档详见：[https://uniapp.dcloud.io/uniCloud/README](https://uniapp.dcloud.io/uniCloud/README)
 
-登录界面：
+### 登录界面
+
+学生可自行注册登录，老师目前后台数据库注册了信息学院和电子科学与技术学院老师
+用户名：信息学院                          密码：12345678
+用户名：电子科学与技术学院          密码：12345678
 
 ![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%871.jpg)
 ![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%872.jpg)
