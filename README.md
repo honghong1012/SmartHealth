@@ -1,63 +1,117 @@
-### 空间与小程序appID设置
-- 在`main.js`中设置空间的`spaceId`、`clientSecret`；
-- 在`manifest.json`中设置微信小程序的`appID`，否则微信端获取的code为：`the code is a mock one`；
-- 在`cloudfunctions-dev/src/utils/constants.js`中设置`AppId`、`AppSecret`、`passSecret`字段，否则不能获取`openid`;
+<style>
+img{
+    width: 60%;
+    padding-left: 20%;
+}
+</style>
+
+# SmartHealth
+
+A full-stack application for managing and reporting students' health information during Covid-19 pandemic.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- [HBuilderX 2.5.8(Alpha Version)](https://www.dcloud.io/hbuilderx.html) - Develop tool
+- [uniCloud](https://unicloud.dcloud.net.cn/pages/login/login)- js developing sever
+
+### Setting
+- In `main.js`, set the space's `spaceId` and `clientSecret`; 
+- In `manifest.json`, set the WeChat mini program's `appID`, otherwise the code obtained on WeChat will be `the code is a mock one`; 
+- In `cloudfunctions-dev/src/utils/constants.js`, set `AppId`, `AppSecret`, and `passSecret` fields, otherwise `openid` cannot be obtained."
+
+### Installing
+
+1. The project requires [registration](https://dev.dcloud.io/#/pages/common/register) and the activation of uniCloud, due to the review requirements of Alibaba Cloud, real-name certification is required.
+
+2. Clone the repository.
+
+3. After cloning the project source code, right-click on the `cloudfunctions` directory and select your service space. 
+   - If you do not have a service space, you need to create one, and the process will guide you through logging in and registering for `uniCloud`.
+
+4. Once the service space is set up, please refer to the [db.md](db.md) file in the project and create the corresponding tables in your cloud database.
+   - The specific method is to right-click on the `cloudfunctions` directory, open the uniCloud web console, and in the cloud database interface, click "New Table", and create all the table names mentioned in [db.md](db.md) one by one.
+
+5. Right-click on each cloud function (folder), then select `upload and deploy` to your service space.
 
 
-### 项目运行和部署说明  
-
-- 本项目需要[HBuilderX 2.5.8（Alpha版）](https://www.dcloud.io/hbuilderx.html)以上版本才能运行。  
-
-- 项目需要[注册](https://dev.dcloud.net.cn/)和开通uniCloud ,因阿里云审核要求,需要实名认证。
-
-- 拉取项目源码后,对`cloudfunctions`目录点右键,选择你的服务空间。如果没有服务空间,需要创建,创建时会引导登录和注册uniCloud。
-  
-- 配好服务空间后,请根据项目下的[db.md](db.md)文件,在你的云数据库中创建相应的表。具体方式是对`cloudfunctions`目录点右键,打开uniCloud web控制台,在里面的云数据库界面点击"新建表",表名里把[db.md](db.md)涉及的表名都创建一遍。
-
-- 对每个云函数（文件夹）点右键，"上传并部署"到你的服务空间中。
-
-- 修改`manifest.json`中的`DCloud_AppID`为自己的。
-
-- 最后，可以运行了。如果是win版,可以直接运行在内置浏览器。如果是mac版,内置浏览器也有跨域问题,需要运行到小程序模拟器或app中,或者给mac的外部浏览器[安装跨域插件](https://ask.dcloud.net.cn/article/35267)。
+6. Change the `DCloud_AppID` in `manifest.json` according your own `DCloud_AppID`.
 
 
-- 项目前端基于uni-app框架开发，它是一个通过vue.js编写所有平台应用的多端框架。你需要了解uni-app以便于更深度的定制。uni-app的文档详见：[https://uniapp.dcloud.io/README](https://uniapp.dcloud.io/README)
-- 项目后端基于uniCloud，它是一个基于js的云开发模式，与微信、支付宝小程序的云开发类似，但可以跨端使用。它基于serverless模型，优势众多。建议开发者通读一遍uniCloud的介绍和快速上手，以方便做二次开发。uniCloud的文档详见：[https://uniapp.dcloud.io/uniCloud/README](https://uniapp.dcloud.io/uniCloud/README)
+7. Finally, you can run it. 
+    - `Windows version`: you can run it directly in the built-in browser. 
+    - `Mac version`: the built-in browser also has cross-domain problems, you need to run it on the mini program simulator or app. Otherwise you need to install a [cross-domain plugin](https://ask.dcloud.net.cn/article/35267) for the Mac external browser.
 
-### 登录界面
 
-学生可自行注册登录，老师目前后台数据库注册了信息学院和电子科学与技术学院老师
+## Built With
+
+- [uni-app](https://en.uniapp.dcloud.io/)
+- [uniCloud]((https://unicloud.dcloud.net.cn/pages/login/login))
+- [Vue.js](https://vuejs.org/)
+- [JavaScript](https://www.javascript.com/)
+
+- `Front-end`: Developed based on the uni-app framework, which is a multi-end framework that writes all platform applications using vue.js. You need to understand uni-app in order to customize it more deeply. For detailed documentation of uni-app, see: [https://uniapp.dcloud.io/README](https://uniapp.dcloud.io/README)
+
+- `Back-end`: Based on uniCloud, which is a cloud development mode based on js, similar to the cloud development of WeChat and Alipay mini programs, but can be used cross-platform. It is based on the serverless model and has many advantages. It is recommended that developers read through the introduction and quick start of uniCloud to facilitate. For detailed documentation of uniCloud see: [https://uniapp.dcloud.io/uniCloud/README](https://uniapp.dcloud.io/uniCloud/README)
+
+## Authors
+
+- **Yanan Wang** - *Initial work* - [a123wyn](https://github.com/a123wyn)
+- **Hong Hong** - *Initial work* - [honghong1012](https://github.com/honghong1012)
+- **Huiting Xu** - *Initial work* - [thera0810](https://github.com/thera0810)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+# Screenshots
+
+## Login Page
+
+Students can register on this page. And the teachers' data are currently saved in the background database.
 
 用户名：信息学院                   密码：12345678
 用户名：电子科学与技术学院          密码：12345678
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%871.jpg)
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%872.jpg)
 
-### 学生端
-进入学生端口后，学生可以进行注册并绑定其学生信息（如学院、年级、专业学号、姓名）以便于后面的老师端口进行管理
+Teacher's tab:<br>
+Username: 信息学院  Password:12345678<br>
+Username: 电子科学与技术学院 Password:12345678<br>
+![image](images/1.jpg)<br>
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%873.png)
+Student's tab:<br>
+![image](images/2.jpg)
 
-绑定信息后，便可以进入每日登记健康信息的界面进行体温等健康信息的登记
+## Students' Port
+After entering the student port, students can register and bind their student information (e.g. college, year, major number, name) to be managed by the teacher later。
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%874.png)
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%875.png)
+![image](images/3.png)
 
-### 老师端
-进入老师端口后，老师可以对学生的名单进行管理以及查看学生报备上了的总数据
+Once you have bound your information, you can enter the daily health information registration screen to register your temperature and other health information.
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%876.jpg)
+![image](images/4.png)
+![image](images/5.png)
 
-对学生的名单进行管理时可以对所管理的学生班级/年级进行查看修改删除等操作
+## Teachers' Port
+After entering the teacher port, teachers can manage the list of students and view the total data reported by students.
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%877.png)
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%878.png)
+![image](images/6.jpg)
 
-查看学生报备情况时可以选择相应的班级/年级查看实时学生信息报备的情况
+When managing the list of students, you can view, modify, delete, etc. the classes/grades of the students you manage.
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%879.png)
+![image](images/7.png)
+![image](images/8.png)
 
-此外，还可以在登陆界面查看全国以及全球实时疫情状况，了解疫情的实时情况。此模块用了网上的接口，运用反向代理实现页面跳转，但因为非企业小程序无法使用反向代理的业务域名，所以体验版无法展示疫情动态实时信息，截图取自开发者工具的预览。
+When viewing the status of student reporting, you can select the appropriate class/grade level to view real-time student information reporting。
 
-![image](https://github.com/a123wyn/Student-information-reporting-system/blob/master/images/%E5%9B%BE%E7%89%8710.png)
+![image](images/9.png)
+
+## Real-time Pandemic Status
+In addition, you can also view the national and global real-time epidemic status in the login screen to understand the real-time situation of the epidemic. 
+  - This module uses the online interface and uses reverse proxy to achieve page jumping, but because the non-enterprise applet cannot use the business domain name of reverse proxy, the experience version cannot show the real-time information of the epidemic dynamics, the screenshot is taken from the preview of the developer tool.
+
+![image](images/10.png)
