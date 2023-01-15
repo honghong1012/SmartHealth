@@ -1,9 +1,3 @@
-<style>
-img{
-    width: 60%;
-    padding-left: 20%;
-}
-</style>
 
 # SmartHealth
 
@@ -49,7 +43,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Built With
 
 - [uni-app](https://en.uniapp.dcloud.io/)
-- [uniCloud]((https://unicloud.dcloud.net.cn/pages/login/login))
+- [uniCloud](https://unicloud.dcloud.net.cn/pages/login/login)
 - [Vue.js](https://vuejs.org/)
 - [JavaScript](https://www.javascript.com/)
 
@@ -74,44 +68,61 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 Students can register on this page. And the teachers' data are currently saved in the background database.
 
-用户名：信息学院                   密码：12345678
-用户名：电子科学与技术学院          密码：12345678
-
-
 Teacher's tab:<br>
 Username: 信息学院  Password:12345678<br>
 Username: 电子科学与技术学院 Password:12345678<br>
-![image](images/1.jpg)<br>
+<div align="center">
+<img src="images/1.jpg" width=40%/>
+</div>
 
 Student's tab:<br>
-![image](images/2.jpg)
+
+<div align="center">
+<img src="images/2.jpg" width=40%/>
+</div>
 
 ## Students' Port
 After entering the student port, students can register and bind their student information (e.g. college, year, major number, name) to be managed by the teacher later。
 
-![image](images/3.png)
+<div align="center">
+<img src="images/3.png" width=40%/>
+</div>
 
 Once you have bound your information, you can enter the daily health information registration screen to register your temperature and other health information.
 
-![image](images/4.png)
-![image](images/5.png)
+<div align="center">
+<img src="images/4.png" width=40%/>
+</div>
+<div align="center">
+<img src="images/5.png" width=40%/>
+</div>
 
 ## Teachers' Port
 After entering the teacher port, teachers can manage the list of students and view the total data reported by students.
 
-![image](images/6.jpg)
+<div align="center">
+<img src="images/6.jpg" width=40%/>
+</div>
 
 When managing the list of students, you can view, modify, delete, etc. the classes/grades of the students you manage.
 
-![image](images/7.png)
-![image](images/8.png)
+<div align="center">
+<img src="images/7.png" width=40%/>
+</div>
+<div align="center">
+<img src="images/8.png" width=40%/>
+</div>
 
 When viewing the status of student reporting, you can select the appropriate class/grade level to view real-time student information reporting。
 
-![image](images/9.png)
+<div align="center">
+<img src="images/9.png" width=40%/>
+</div>
 
 ## Real-time Pandemic Status
 In addition, you can also view the national and global real-time epidemic status in the login screen to understand the real-time situation of the epidemic. 
   - This module uses the online interface and uses reverse proxy to achieve page jumping, but because the non-enterprise applet cannot use the business domain name of reverse proxy, the experience version cannot show the real-time information of the epidemic dynamics, the screenshot is taken from the preview of the developer tool.
 
-![image](images/10.png)
+<div align="center">
+<img src="images/10.png" width=40%/>
+</div>
